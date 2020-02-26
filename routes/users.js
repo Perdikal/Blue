@@ -7,8 +7,8 @@ const User = require('../models/User');
 /* Here we'll write the routes dedicated to handle the user logic (auth) */
 
 router.post('/signup', (req, res) => {
-  console.log('it works', req.body)
-  const { firstName, lastName, email, password, manager } = req.body;
+  console.log('it works', req.body);
+  const { firstName, lastName, email, password } = req.body;
 
   if (!email) {
     return res.status(400).json({ message: "email can't be empty" });
@@ -28,7 +28,12 @@ router.post('/signup', (req, res) => {
           return bcrypt.hash(password, salt);
         })
         .then(hash => {
-          return User.create({ email: email, password: hash });
+          return User.create({
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
+            password: hash
+          });
         })
         .then(newUser => {
           // passport login
