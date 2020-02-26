@@ -1,14 +1,15 @@
 /* We'll centralize our routes imports to this file to keep our code clean */
 
-const router = require('express').Router();
-const projectRoutes = require('./project');
-const usersRoutes = require('./users');
+const router = require("express").Router();
+const projectRoutes = require("./project");
+const usersRoutes = require("./users");
+const profile = require("./profile");
+router.use("/api/auth", usersRoutes);
+router.use("/api", projectRoutes);
+router.use("/api", profile);
 
-router.use('/api/auth', usersRoutes);
-router.use('/api', projectRoutes);
-
-router.get('/', (req, res, next) => {
-  res.send('Hello');
+router.get("/", (req, res, next) => {
+  res.send("Hello");
 });
 
 module.exports = router;
