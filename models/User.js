@@ -14,9 +14,9 @@ const userSchema = new Schema(
     },
     manager: Boolean,
     role: String,
-    author: {
+    projects: {
       type: Schema.Types.ObjectId,
-      ref: "User"
+      ref: "Project"
     }
   },
   {
