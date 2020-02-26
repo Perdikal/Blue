@@ -3,10 +3,17 @@ const Schema = mongoose.Schema;
 
 const userSchema = new Schema(
   {
-    firstName: String,
-    lastName: String,
-    email: String,
-    password: String,
+    firstName: { type: String, required: true },
+    lastName: { type: String, required: true },
+    email: {
+      type: String,
+      lowercase: true,
+      unique: true,
+      required: [true, "can't be blank"],
+      match: [/\S+@\S+\.\S+/, "is invalid"],
+      index: true
+    },
+    password: { type: String, required: true },
     image_Url: {
       type: String,
       default:
