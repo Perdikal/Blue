@@ -1,9 +1,10 @@
-const express = require('express');
-const router  = express.Router();
+/* We'll centralize our routes imports to this file to keep our code clean */
 
-/* GET home page */
-router.get('/', (req, res, next) => {
-  res.render('index');
-});
+const router = require("express").Router();
+const usersRoutes = require("./auth");
+const projectRoutes = require("./project");
+
+router.use("/api/auth", usersRoutes);
+router.use("/api", projectRoutes);
 
 module.exports = router;
