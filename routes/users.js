@@ -7,7 +7,6 @@ const User = require('../models/User');
 //>>>>>>>>>>>>>>>>>>>>>   SIGNUP   <<<<<<<<<<<<<<<<<<<<<<
 
 router.post('/signup', (req, res) => {
-  console.log('it works', req.body);
   const { firstName, lastName, email, password } = req.body;
 
   if (!email) {
@@ -41,6 +40,7 @@ router.post('/signup', (req, res) => {
               res.status(500).json({ message: 'Error while logging in' });
             else res.json(newUser);
           });
+          console.log('it works', newUser);
         });
     })
     .catch(err => {
