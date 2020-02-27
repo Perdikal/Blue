@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const User = require("../models/User");
 
 router.get("/profile", (req, res) => {
   const userId = req.params.id;
@@ -16,16 +17,18 @@ router.get("/profile", (req, res) => {
 });
 
 router.get("/project", (req, res) => {
-  console.log(req.user);
-  //const userId = req.user.projects;
+  console.log(req.user, "uuuuser");
+  const userId = req.user.projects;
   console.log(req.user.projects);
-  /* const projects = [];
+  console.log(userId, "this is the userId");
+
+  /*  const projects = [];
     Project.members.forEach(el => { if(el.includes(req.user._id)){
 projects.push(Project)
-    }})  */
+    }})   */
 
   User.findById(userId)
-    .populate("projects")
+    .populate("project")
     .then(user => {
       res.json(user);
     })
@@ -37,7 +40,7 @@ projects.push(Project)
 });
 
 router.post("/project", (req, res) => {
-  const { name, author, members } = req.body;
+  const { name } = req.body;
   Project.create(
     {
       name: name,
