@@ -65,8 +65,6 @@ router.post("/project/:id/createtask", loginCheck, (req, res) => {
         res.json({ message: "Alles good" });
       }
     );
-
-    // res.json(task);
   });
 });
 

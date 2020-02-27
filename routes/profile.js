@@ -70,8 +70,7 @@ router.post("/project", (req, res) => {
   Project.create({
     name: name,
     author: req.user._id,
-    members: [req.user._id]
-    //   members: [...members, req.user._id]
+    members: [...members, req.user._id]
   }).then(project => {
     console.log("project", project);
     project.members.forEach(member => {
