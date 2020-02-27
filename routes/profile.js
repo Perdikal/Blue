@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../models/User");
+const Project = require("../models/Project");
 
 router.get("/profile", (req, res) => {
   const userId = req.params.id;
@@ -16,9 +17,32 @@ router.get("/profile", (req, res) => {
     });
 });
 
+router.post("/profile/edit", (req, res) => {
+  const userId = req.user._id;
+  const { firstName, lastName, email, role } = req.body;
+
+  console.log(req.body, "req.body");
+  console.log(userId, "userId");
+  console.log(req.params, "params");
+  console.log(req.user);
+  User.findByIdAndUpdate(
+    userId,
+    {
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      role: role
+    },
+    { new: true }
+  ).then(user => {
+    res.json(user);
+    console.log(user);
+  });
+});
+
 router.get("/project", (req, res) => {
   console.log(req.user, "uuuuser");
-  const userId = req.user.projects;
+  const userId = req.user._id;
   console.log(req.user.projects);
   console.log(userId, "this is the userId");
 
@@ -28,8 +52,9 @@ projects.push(Project)
     }})   */
 
   User.findById(userId)
-    .populate("project")
+    .populate("projects")
     .then(user => {
+      console.log(user);
       res.json(user);
     })
     .catch(err => {
@@ -40,34 +65,19 @@ projects.push(Project)
 });
 
 router.post("/project", (req, res) => {
-  const { name } = req.body;
-  Project.create(
-    {
-      name: name,
-      author: {
-        type: Schema.Types.ObjectId,
-        ref: "User"
-      },
-      members: [
-        {
-          type: Schema.Types.ObjectId,
-          ref: "User"
-        }
-      ],
-      tasks: [
-        {
-          type: Schema.Types.ObjectId,
-          ref: "Task"
-        }
-      ]
-    },
-    {
-      timestamps: {
-        createdAt: "created_at",
-        updatedAt: "updated_at"
-      }
-    }
-  );
+  const { name, members } = req.body;
+  console.log(members);
+  Project.create({
+    name: name,
+    author: req.user._id,
+    members: [req.user._id]
+    //   members: [...members, req.user._id]
+  }).then(project => {
+    console.log("project", project);
+    project.members.forEach(member => {
+      User.findByIdAndUpdate(member, { $push: { projects: project._id } });
+    });
+  });
 });
 
 module.exports = router;
