@@ -8,7 +8,7 @@ const LogSchema = new Schema(
       ref: "User"
     },
     comment: String,
-    Project: {
+    project: {
       type: Schema.Types.ObjectId,
       ref: "Project"
     }
