@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs');
 const passport = require('passport');
 const User = require('../models/User');
 
-/* Here we'll write the routes dedicated to handle the user logic (auth) */
+//>>>>>>>>>>>>>>>>>>>>>   SIGNUP   <<<<<<<<<<<<<<<<<<<<<<
 
 router.post('/signup', (req, res) => {
   console.log('it works', req.body);
@@ -36,7 +36,6 @@ router.post('/signup', (req, res) => {
           });
         })
         .then(newUser => {
-          // passport login
           req.login(newUser, err => {
             if (err)
               res.status(500).json({ message: 'Error while logging in' });
@@ -49,6 +48,8 @@ router.post('/signup', (req, res) => {
     });
 });
 
+//>>>>>>>>>>>>>>>>>>>>>>   LOGIN   <<<<<<<<<<<<<<<<<<<<<<<
+
 router.post('/login', (req, res, next) => {
   passport.authenticate('local', (err, user, info) => {
     if (err) {
@@ -58,7 +59,6 @@ router.post('/login', (req, res, next) => {
       // no user found with email or password didn't match
       return res.status(400).json({ message: info.message });
     }
-    // passport req.login
     req.login(user, err => {
       if (err) {
         return res.status(500).json({ message: 'Error while logging in' });
@@ -68,12 +68,14 @@ router.post('/login', (req, res, next) => {
   })(req, res, next);
 });
 
+// >>>>>>>>>>>>>>>>>>  LOGOUT  <<<<<<<<<<<<<<<<<<<<<
+
 router.delete('/logout', (req, res) => {
-  // passport logout function
   req.logout();
   res.json({ message: 'Successful logout' });
 });
 
+//  <<<<<<<<<<<<<<<<<  LOGGEDIN   >>>>>>>>>>>>>>>>>
 router.get('/loggedin', (req, res) => {
   res.json(req.user);
 });
