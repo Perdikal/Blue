@@ -2,41 +2,41 @@ import React, { Component } from "react";
 import axios from "axios";
 
 export default class Navbar extends Component {
-  state = {
-    email: "",
-    password: "",
-    message: ""
-  };
+  // state = {
+  //   email: "",
+  //   password: "",
+  //   message: ""
+  // };
 
-  handleChange = event => {
-    this.setState({
-      [event.target.name]: event.target.value
-    });
-  };
+  // handleChange = event => {
+  //   this.setState({
+  //     [event.target.name]: event.target.value
+  //   });
+  // };
 
-  handleSubmit = event => {
-    event.preventDefault();
+  // handleSubmit = event => {
+  //   event.preventDefault();
 
-    axios
-      .post("/api/auth/login", {
-        email: this.state.email,
-        password: this.state.password
-      })
-      .then(response => {
-        this.history.push("/profile");
-        this.props.setUser(response.data);
-      })
-      .catch(err => {
-        this.setState({
-          message: err.response.data.message
-        });
-      });
-  };
+  //   axios
+  //     .post("/api/auth/login", {
+  //       email: this.state.email,
+  //       password: this.state.password
+  //     })
+  //     .then(response => {
+  //       this.history.push("/profile");
+  //       this.props.setUser(response.data);
+  //     })
+  //     .catch(err => {
+  //       this.setState({
+  //         message: err.response.data.message
+  //       });
+  //     });
+  // };
 
   render() {
     return (
       <div>
-        <form onSubmit={this.handleSubmit}>
+        {/* <form onSubmit={this.handleSubmit}>
           <label htmlFor="email">Email:</label>
           <input
             type="email"
@@ -55,7 +55,7 @@ export default class Navbar extends Component {
           />
           <button type="submit">Login</button>
           {this.state.message && <p>{this.state.message}</p>}
-        </form>
+        </form> */}
       </div>
     );
   }
