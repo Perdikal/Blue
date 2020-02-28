@@ -1,11 +1,11 @@
-import React from 'react';
-import { Route } from 'react-router-dom';
-import './App.css';
-import Navbar from './components/Navbar/Navbar';
-import Signup from './components/signup/Signup';
-import Info from './components/info/Info';
-import Step from './components/steps/Step';
-
+import React from "react";
+import { Route } from "react-router-dom";
+import "./App.css";
+import Navbar from "./components/Navbar/Navbar";
+import Signup from "./components/signup/Signup";
+import Info from "./components/info/Info";
+import Steps from "./components/steps/Steps";
+import axios from "axios";
 class App extends React.Component {
   state = {
     user: this.props.user
@@ -13,9 +13,11 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        {this.props}
         <Navbar />
+        <h2>Blue</h2>
 
+        <Info />
+        <Steps />
         {/* <info user= {}/> */}
       </div>
     );

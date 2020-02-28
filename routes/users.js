@@ -41,7 +41,7 @@ router.post("/signup", (req, res) => {
               res.status(500).json({ message: "Error while logging in" });
             else res.json(newUser);
           });
-          console.log('it works', newUser);
+          console.log("it works", newUser);
         });
     })
     .catch(err => {
@@ -79,6 +79,7 @@ router.delete("/logout", (req, res) => {
 
 //  <<<<<<<<<<<<<<<<<  LOGGEDIN   >>>>>>>>>>>>>>>>>
 router.get("/loggedin", (req, res) => {
+  console.log("yo req, received");
   res.json(req.user);
 });
 

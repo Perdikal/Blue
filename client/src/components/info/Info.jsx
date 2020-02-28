@@ -1,18 +1,17 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-export default class Login extends Component {
-  render() {
-    return (
-      <div className="information-container">
-        <img src={this.props.user.image_Url} alt="User Image" />
-        <div className="text-info">
-          <div className="name-display">
-            {this.props.user.firstname} {this.props.user.lastname}
-          </div>
-          <div className="role-display">{this.props.user.role}</div>
-        </div>
-      </div>
-    );
-  }
-}
+const Info = () => {
+  return (
+    <div>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe explicabo
+        doloremque ad. Enim mollitia maxime voluptatem exercitationem officiis
+        ex distinctio, beatae aliquid fugiat pariatur, at obcaecati deserunt ab
+        rem nemo?
+      </p>
+    </div>
+  );
+};
+
+export default Info;

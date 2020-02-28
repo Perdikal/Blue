@@ -18,16 +18,22 @@ export default class Project extends Component {
     });
   };
   render() {
-    <div>
-      {this.state.project.slice(0, 3).map(project => {
-        return (
-          <Link to="/project">
-            <div className="projectBox">
-              <span>{project.name}</span>
-            </div>
-          </Link>
-        );
-      })}
-    </div>;
+    return (
+      <div>
+        {(this.state.projects.length < 3
+          ? this.state.project.slice(0)
+          : this.state.project.slice(0, 3)
+        ).map(project => {
+          return (
+            <Link to={`/project   TOfixLater)`}>
+              <div className="projectBox">
+                <span>{project.name}</span>
+              </div>
+            </Link>
+          );
+        })}
+        <button>All projects</button>
+      </div>
+    );
   }
 }
