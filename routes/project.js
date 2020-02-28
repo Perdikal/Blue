@@ -51,8 +51,13 @@ router.post("/project/:id/log", loginCheck, (req, res) => {
 });
 
 router.get("/project/bringmine", loginCheck, (req, res) => {
-  const projectList = Project.find({ members: req.user._id });
-  res.json(projectList);
+  Project.find({ members: req.user._id })
+    .then(projectList => {
+      res.json(projectList);
+    })
+    .catch(err => {
+      console.error(err);
+    });
 });
 
 router.post("/project/:id/createtask", loginCheck, (req, res) => {
@@ -70,6 +75,13 @@ router.post("/project/:id/createtask", loginCheck, (req, res) => {
         res.json({ message: "Alles good" });
       }
     );
+  });
+});
+
+router.get("/project/:id/tasks", loginCheck, (req, res) => {
+  const projectId = req.params.id;
+  Task.find({ project: projectId }).then(taskList => {
+    res.json(taskList);
   });
 });
 

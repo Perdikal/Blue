@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
+import React, { Component } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
 
 export default class Project extends Component {
   state = {
@@ -11,7 +11,7 @@ export default class Project extends Component {
   }
 
   getProjectData = () => {
-    axios.get('/project/bringmine').then(response => {
+    axios.get("/project/bringmine").then(response => {
       this.setState({
         projects: response.data
       });
@@ -25,7 +25,7 @@ export default class Project extends Component {
           : this.state.project.slice(0, 3)
         ).map(project => {
           return (
-            <Link to={`/project   TOfixLater)`}>
+            <Link to={`/project/${project._id})`}>
               <div className="projectBox">
                 <span>{project.name}</span>
               </div>
