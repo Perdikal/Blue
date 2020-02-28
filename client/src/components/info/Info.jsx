@@ -1,9 +1,5 @@
-<<<<<<< HEAD
-import React from "react";
-=======
 import React, { Component } from 'react';
 import axios from 'axios';
->>>>>>> c9328c69e99f0d8ba88389d4ada50a610519ddf1
 
 const Info = () => {
   return (
