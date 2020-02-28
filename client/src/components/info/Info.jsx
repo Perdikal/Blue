@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-
-=======
 import React from "react";
 
 const Info = () => {
@@ -17,4 +14,3 @@ const Info = () => {
 };
 
 export default Info;
->>>>>>> cc76c732dce842a44aa948a42f626f4ecd789c40
