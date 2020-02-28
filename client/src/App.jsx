@@ -1,11 +1,11 @@
 import React from "react";
 import { Route } from "react-router-dom";
 import "./App.css";
-import Navbar from "./components/Navbar.js";
-import Posts from "./components/Posts.js";
-import PostDetail from "./components/PostDetail.js";
-import Signup from "./components/Signup.js";
-import Login from "./components/Login.js";
+import Navbar from "./components/Navbar/Navbar";
+import Signup from "./components/signup/Signup";
+import Info from "./components/info/Info";
+import Steps from "./components/steps/Step";
+import axios from "axios";
 
 class App extends React.Component {
   state = {
