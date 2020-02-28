@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import axios from "axios";
+import React, { Component } from 'react';
+import axios from 'axios';
 
-export default class PostDetail extends Component {
+export default class UserInfo extends Component {
   render() {
     return (
       <div className="information-container">

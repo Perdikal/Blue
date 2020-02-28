@@ -6,6 +6,7 @@ import Signup from "./components/signup/Signup";
 import Info from "./components/info/Info";
 import Steps from "./components/steps/Steps";
 import axios from "axios";
+import Task from "./components/tasks/Task";
 
 class App extends React.Component {
   state = {
@@ -20,6 +21,13 @@ class App extends React.Component {
         <Info />
         <Steps />
         {/* <info user= {}/> */}
+        <Route
+          exact
+          path="/project/:projectId"
+          render={props => (
+            <Task {...props} projectId={Boolean(this.state.user)} />
+          )}
+        />
       </div>
     );
   }
