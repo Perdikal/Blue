@@ -5,7 +5,7 @@ import Navbar from "./components/Navbar/Navbar";
 import Signup from "./components/signup/Signup";
 import Info from "./components/info/Info";
 import Steps from "./components/steps/Steps";
-
+import axios from "axios";
 class App extends React.Component {
   state = {
     user: this.props.user
