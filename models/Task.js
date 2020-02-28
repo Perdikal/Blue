@@ -14,6 +14,7 @@ const taskSchema = new Schema(
       enum: ["General", "doing", "done", "toUpdate"],
       default: "General"
     },
+    project: { type: Schema.Types.ObjectId, ref: "Project" },
     assignee: [
       {
         type: Schema.Types.ObjectId,
