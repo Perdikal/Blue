@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import axios from "axios";
-import { Link } from "react-router-dom";
+import React, { Component } from 'react';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
 
-export default class PostDetail extends Component {
+export default class Project extends Component {
   state = {
     projects: []
   };
@@ -11,7 +11,7 @@ export default class PostDetail extends Component {
   }
 
   getProjectData = () => {
-    axios.get("/project/bringmine").then(response => {
+    axios.get('/project/bringmine').then(response => {
       this.setState({
         projects: response.data
       });
