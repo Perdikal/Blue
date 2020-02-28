@@ -54,6 +54,7 @@ export default class Navbar extends Component {
             onChange={this.handleChange}
           />
           <button type="submit">Login</button>
+          {this.state.message && <p>{this.state.message}</p>}
         </form>
       </div>
     );
