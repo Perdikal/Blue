@@ -50,6 +50,11 @@ router.post("/project/:id/log", loginCheck, (req, res) => {
     });
 });
 
+router.get("/project/bringmine", loginCheck, (req, res) => {
+  const projectList = Project.find({ members: req.user._id });
+  res.json(projectList);
+});
+
 router.post("/project/:id/createtask", loginCheck, (req, res) => {
   const projectId = req.params._id;
   const id = req.user._id;
