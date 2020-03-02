@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import axios from "axios";
-import { Link } from "react-router-dom";
-import NewProjectForm from "../NewProjectForm/NewProjectForm";
+import React, { Component } from 'react';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
+import NewProjectForm from '../NewProjectForm/NewProjectForm';
 
 export default class Project extends Component {
   state = {
@@ -14,7 +14,7 @@ export default class Project extends Component {
 
   getProjectData = () => {
     axios
-      .get("/api/project/bringmine")
+      .get('/api/project/bringmine')
       .then(response => {
         this.setState({
           projects: response.data
@@ -33,7 +33,7 @@ export default class Project extends Component {
 
   createNewProject = () => {
     axios
-      .post("/api/project/newProject")
+      .post('/api/project/createNewProject')
       .then(response => {
         console.log(response);
       })
@@ -59,7 +59,7 @@ export default class Project extends Component {
         })}
         <button>All projects</button>
         <button onClick={this.showForm}>Create New Project</button>
-        {this.state.showForm ? <NewProjectForm /> : ""}
+        {this.state.showForm ? <NewProjectForm /> : ''}
       </div>
     );
   }
