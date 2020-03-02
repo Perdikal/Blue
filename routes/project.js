@@ -19,6 +19,42 @@ router.get("/allMembers", (req, res) => {
   });
 });
 
+router.get('/project', (req, res) => {
+  const userId = req.user._id;
+
+  /*  const projects = [];
+    Project.members.forEach(el => { if(el.includes(req.user._id)){
+projects.push(Project)
+    }})   */
+
+  User.findById(userId)
+    .populate('projects')
+    .then(user => {
+      res.json(user);
+    })
+    .catch(err => {
+      res.status(500).json({
+        message: err.message
+      });
+    });
+});
+
+router.post('/project/createProject', (req, res) => {
+  const { name, members } = req.body;
+  Project.create(
+    {
+      name: name,
+      author: req.user._id,
+      members: [...members, req.user._id]
+    },
+    console.log(Project)
+  ).then(project => {
+    project.members.forEach(member => {
+      User.findByIdAndUpdate(member, { $push: { projects: project._id } });
+    });
+  });
+});
+
 router.post("/project/:id/changestatus/:taskid", loginCheck, (req, res) => {
   const ticketId = req.params.taskid;
   const { status } = req.body;
@@ -92,18 +128,6 @@ router.get("/project/:id/tasks", loginCheck, (req, res) => {
   });
 });
 
-router.get("/project/:id", loginCheck, (req, res) => {
-  const projectId = req.params.id;
-  res.json({ responseKey: projectId });
-  Project.findById(projectId)
-    .then(project => {
-      res.json(project);
-    })
-    .catch(error => {
-      res.status(500).json({
-        message: err.message
-      });
-    });
-});
+
 
 module.exports = router;
