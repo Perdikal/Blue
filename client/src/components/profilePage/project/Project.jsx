@@ -11,11 +11,11 @@ export default class Project extends Component {
   }
 
   getProjectData = () => {
-    axios.get("/project/bringmine").then(response => {
+    /*  axios.get("/project/bringmine").then(response => {
       this.setState({
         projects: response.data
       });
-    });
+    }); */
   };
   createNewProject;
 
