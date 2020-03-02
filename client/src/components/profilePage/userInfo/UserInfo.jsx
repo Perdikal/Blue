@@ -12,6 +12,7 @@ export default class UserInfo extends Component {
   };
 
   render() {
+    console.log("USERINFO", UserInfo);
     return (
       <div className="information-container">
         <img src={this.props.user?.image_Url} alt="User Image" />
