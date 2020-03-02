@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import UserInfo from './userInfo/UserInfo';
-import Project from './project/Project';
-import ProjectButt from './projectButt/ProjectButt';
+import React, { Component } from "react";
+import UserInfo from "./userInfo/UserInfo";
+import Project from "./project/Project";
+import NewProjectForm from "./NewProjectForm/NewProjectForm";
 
 export default class ProfilePage extends Component {
   render() {
@@ -9,7 +9,7 @@ export default class ProfilePage extends Component {
       <div>
         <UserInfo />
         <Project />
-        <ProjectButt />
+        <NewProjectForm />
       </div>
     );
   }

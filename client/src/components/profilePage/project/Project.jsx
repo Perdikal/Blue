@@ -1,23 +1,46 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import NewProjectForm from "../NewProjectForm/NewProjectForm";
 
 export default class Project extends Component {
   state = {
-    projects: []
+    projects: [],
+    showForm: false
   };
   componentDidMount() {
     this.getProjectData();
   }
 
   getProjectData = () => {
-    axios.get("/project/bringmine").then(response => {
-      this.setState({
-        projects: response.data
+    axios
+      .get("/project/bringmine")
+      .then(response => {
+        this.setState({
+          projects: response.data
+        });
+      })
+      .catch(err => {
+        console.error(err);
       });
+  };
+
+  showForm = () => {
+    this.setState({
+      showForm: !this.state.showForm
     });
   };
-  createNewProject;
+
+  createNewProject = () => {
+    axios
+      .post("/project/newProject")
+      .then(response => {
+        console.log(response);
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  };
 
   render() {
     return (
@@ -35,7 +58,8 @@ export default class Project extends Component {
           );
         })}
         <button>All projects</button>
-        <button>Create New Project</button>
+        <button onClick={this.showForm}>Create New Project</button>
+        {this.state.showForm ? <NewProjectForm /> : ""}
       </div>
     );
   }
