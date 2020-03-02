@@ -6,7 +6,7 @@ export default class Navbar extends Component {
   render() {
     return (
       <div>
-        <Login />
+        <Login history={this.props.history} setUser={this.props.setUser} />
       </div>
     );
   }

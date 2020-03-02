@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import axios from 'axios';
+import React, { Component, Link } from "react";
+import axios from "axios";
 
 export default class Login extends Component {
   state = {
-    email: '',
-    password: '',
-    message: ''
+    email: "",
+    password: "",
+    message: ""
   };
 
   handleChange = event => {
@@ -18,13 +18,16 @@ export default class Login extends Component {
     event.preventDefault();
 
     axios
-      .post('/api/auth/login', {
+      .post("/api/auth/login", {
         email: this.state.email,
         password: this.state.password
       })
       .then(response => {
-        this.history.push('/profile');
+        console.log("LOGIN WORKED", response.data);
         this.props.setUser(response.data);
+
+        this.props.history.push("/profilepage");
+        //Redirect
       })
       .catch(err => {
         this.setState({
@@ -53,7 +56,9 @@ export default class Login extends Component {
             value={this.state.password}
             onChange={this.handleChange}
           />
+
           <button type="submit">Login</button>
+
           {this.state.message && <p>{this.state.message}</p>}
         </form>
       </div>

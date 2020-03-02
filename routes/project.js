@@ -1,18 +1,25 @@
-const router = require('express').Router();
-const Project = require('../models/Project');
-const User = require('../models/User');
-const Task = require('../models/Task');
-const Log = require('../models/Log');
+const router = require("express").Router();
+const Project = require("../models/Project");
+const User = require("../models/User");
+const Task = require("../models/Task");
+const Log = require("../models/Log");
 
 const loginCheck = (req, res, next) => {
   if (req.user) {
     next();
   } else {
-    res.redirect('/');
+    res.redirect("/");
   }
 };
 
-router.post('/project/:id/changestatus/:taskid', loginCheck, (req, res) => {
+router.get("/allMembers", (req, res) => {
+  User.find({}).then(response => {
+    console.log(response);
+    res.json(response);
+  });
+});
+
+router.post("/project/:id/changestatus/:taskid", loginCheck, (req, res) => {
   const ticketId = req.params.taskid;
   const { status } = req.body;
   Task.findById(ticketId).then(ticket => {
@@ -22,7 +29,7 @@ router.post('/project/:id/changestatus/:taskid', loginCheck, (req, res) => {
   });
 });
 
-router.get('/project/:id/log', loginCheck, (req, res) => {
+router.get("/project/:id/log", loginCheck, (req, res) => {
   const projectId = req.params.id;
   Log.find({ project: projectId })
     .then(logs => {
@@ -33,7 +40,7 @@ router.get('/project/:id/log', loginCheck, (req, res) => {
     });
 });
 
-router.post('/project/:id/log', loginCheck, (req, res) => {
+router.post("/project/:id/log", loginCheck, (req, res) => {
   const projectId = req.params.id;
   const { comment } = req.body;
   Log.create({
@@ -49,7 +56,7 @@ router.post('/project/:id/log', loginCheck, (req, res) => {
     });
 });
 
-router.get('/project/bringmine', loginCheck, (req, res) => {
+router.get("/project/bringmine", loginCheck, (req, res) => {
   Project.find({ members: req.user._id })
     .then(projectList => {
       res.json(projectList);
@@ -72,20 +79,20 @@ router.post('/project/:id/createtask', loginCheck, (req, res) => {
   }).then(task => {
     Project.findByIdAndUpdate(projectId, { $push: { tasks: task._id } }).then(
       () => {
-        res.json({ message: 'Alles good' });
+        res.json({ message: "Alles good" });
       }
     );
   });
 });
 
-router.get('/project/:id/tasks', loginCheck, (req, res) => {
+router.get("/project/:id/tasks", loginCheck, (req, res) => {
   const projectId = req.params.id;
   Task.find({ project: projectId }).then(taskList => {
     res.json(taskList);
   });
 });
 
-router.get('/project/:id', loginCheck, (req, res) => {
+router.get("/project/:id", loginCheck, (req, res) => {
   const projectId = req.params.id;
   res.json({ responseKey: projectId });
   Project.findById(projectId)
