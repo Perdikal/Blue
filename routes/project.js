@@ -66,15 +66,16 @@ router.get("/project/bringmine", loginCheck, (req, res) => {
     });
 });
 
-router.post("/project/:id/createtask", loginCheck, (req, res) => {
-  const projectId = req.params._id;
+router.post('/project/:id/createtask', loginCheck, (req, res) => {
+  const projectId = req.params.id;
   const id = req.user._id;
-  const { title, description, assignee } = req.body;
+  const { title, description, assignee, status } = req.body;
   Task.create({
     title: title,
     description: description,
-    author: id,
-    assignee: assignee
+    assignee: assignee,
+    status: status,
+    author: id
   }).then(task => {
     Project.findByIdAndUpdate(projectId, { $push: { tasks: task._id } }).then(
       () => {
