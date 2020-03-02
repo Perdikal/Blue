@@ -30,37 +30,20 @@ class App extends React.Component {
           render={props => (
             <Navbar
               history={props.history}
-              // {...props}
+              //{...props}
               setUser={this.setUser}
               user={this.state.user}
             />
           )}
         />
-        {/*        // component={Signup} */}
-        {/*        <Navbar
-          history={props.history}
-          setUser={this.setUser}
-          user={this.state.user}
-        /> */}
-        <Signup setUser={this.setUser} user={this.state.user} />
-        <Info />
-        <Steps />
-
+        <Route exact path="/" component={HomePage} />
         <Route
           exact
           path="/profilepage"
           render={props => <ProfilePage {...props} user={this.state.user} />}
         />
-
-        {/*        <Route
-          exact
-          path="/profilepage"
-          user={this.state.user}
-          component={ProfilePage}
-        /> */}
-        <TaskDashboard />
+        <TaskDashboard /> {/* NEED A ROUTE */}
         <Footer />
-        {/* <info user= {}/> */}
       </div>
     );
   }
