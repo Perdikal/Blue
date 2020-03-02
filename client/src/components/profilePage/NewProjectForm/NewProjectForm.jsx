@@ -4,7 +4,8 @@ import axios from "axios";
 export default class NewProjectForm extends Component {
   state = {
     projectName: "",
-    collaborators: []
+    collaborators: [],
+    users: []
   };
 
   handleNameChange = event => {
@@ -13,14 +14,17 @@ export default class NewProjectForm extends Component {
     });
   };
 
+  componentDidMount() {
+    axios.get("/api/allMembers").then(response => {
+      this.setState({
+        userNames: response.data
+      });
+    });
+  }
+
   handleCollabChange = event => {
     this.setState({
       [event.target.name]: event.target.value
-    });
-
-    axios.get("/api/allMembers").then(response => {
-      console.log(response);
-      //here we will show the list of names matching the query});
     });
   };
 

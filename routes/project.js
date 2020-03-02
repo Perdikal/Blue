@@ -13,8 +13,10 @@ const loginCheck = (req, res, next) => {
 };
 
 router.get("/allMembers", (req, res) => {
-  //res.send("request received");
-  console.log("request received");
+  User.find({}).then(response => {
+    console.log(response);
+    res.json(response);
+  });
 });
 
 router.post("/project/:id/changestatus/:taskid", loginCheck, (req, res) => {
