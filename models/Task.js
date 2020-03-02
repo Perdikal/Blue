@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const taskSchema = new Schema(
@@ -7,27 +7,28 @@ const taskSchema = new Schema(
     description: String,
     author: {
       type: Schema.Types.ObjectId,
-      ref: "User"
+      ref: 'User'
     },
     status: {
       type: String,
-      enum: ["General", "doing", "done", "toUpdate"],
-      default: "General"
+      enum: ['General', 'doing', 'done', 'toUpdate'],
+      default: 'General'
     },
+    project: { type: Schema.Types.ObjectId, ref: "Project" },
     assignee: [
       {
         type: Schema.Types.ObjectId,
-        ref: "User"
+        ref: 'User'
       }
     ]
   },
   {
     timestamps: {
-      createdAt: "created_at",
-      updatedAt: "updated_at"
+      createdAt: 'created_at',
+      updatedAt: 'updated_at'
     }
   }
 );
 
-const Task = mongoose.model("Task", taskSchema);
+const Task = mongoose.model('Task', taskSchema);
 module.exports = Task;
