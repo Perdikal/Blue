@@ -17,6 +17,7 @@ export default class Project extends Component {
       });
     });
   };
+  createNewProject;
 
   render() {
     return (
@@ -34,6 +35,7 @@ export default class Project extends Component {
           );
         })}
         <button>All projects</button>
+        <button>Create New Project</button>
       </div>
     );
   }
