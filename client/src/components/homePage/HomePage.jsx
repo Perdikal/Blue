@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Info from "./info/Info";
-import Login from "./login/Login";
 import Signup from "./signup/Signup";
 import Steps from "./steps/Steps";
 import Navbar from "../Navbar/Navbar";
