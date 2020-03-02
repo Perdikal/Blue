@@ -19,7 +19,7 @@ router.get("/allMembers", (req, res) => {
   });
 });
 
-router.get('/project', (req, res) => {
+router.get("/project", (req, res) => {
   const userId = req.user._id;
 
   /*  const projects = [];
@@ -28,7 +28,7 @@ projects.push(Project)
     }})   */
 
   User.findById(userId)
-    .populate('projects')
+    .populate("projects")
     .then(user => {
       res.json(user);
     })
@@ -39,19 +39,24 @@ projects.push(Project)
     });
 });
 
-router.post('/project/createProject', (req, res) => {
+router.post("/project/createProject", (req, res) => {
   const { name, members } = req.body;
-  Project.create(
-    {
-      name: name,
-      author: req.user._id,
-      members: [...members, req.user._id]
-    },
-    console.log(Project)
-  ).then(project => {
+  const membersId = members.map(member => {
+    console.log(member.split(" ").slice(0, 1));
+    //return User.find({});
+  });
+  Project.create({
+    name: name,
+    author: req.user._id,
+    members: [...members, req.user._id]
+  }).then(project => {
+    console.log(
+      project
+    ); /* 
     project.members.forEach(member => {
       User.findByIdAndUpdate(member, { $push: { projects: project._id } });
     });
+   */
   });
 });
 
@@ -102,7 +107,7 @@ router.get("/project/bringmine", loginCheck, (req, res) => {
     });
 });
 
-router.post('/project/:id/createtask', loginCheck, (req, res) => {
+router.post("/project/:id/createtask", loginCheck, (req, res) => {
   const projectId = req.params.id;
   const id = req.user._id;
   const { title, description, assignee, status } = req.body;
@@ -127,7 +132,5 @@ router.get("/project/:id/tasks", loginCheck, (req, res) => {
     res.json(taskList);
   });
 });
-
-
 
 module.exports = router;

@@ -40,9 +40,8 @@ export default class Signup extends Component {
         this.props.setUser(response.data);
       })
       .catch(err => {
-        console.log(err.response.data.message);
         this.setState({
-          message: err.response.data.message
+          message: err.response?.data.message
         });
       });
   };

@@ -5,10 +5,10 @@ export default class NewProjectForm extends Component {
   state = {
     projectName: "",
     collabText: "",
-    collaborators: [],
+    inputCollaborators: [],
     users: [],
     filteredCollaborators: [],
-    collabCount: 1
+    collaboratorsToAdd: []
   };
 
   componentDidMount() {
@@ -19,11 +19,24 @@ export default class NewProjectForm extends Component {
     });
   }
 
-  createColaborators = e => {
+  createProject = () => {
+    axios
+      .post("/api/project/createProject", {
+        name: this.state.projectName,
+        members: this.state.collaboratorsToAdd
+      })
+      .then(response => {});
+  };
+
+  addColaborators = e => {
     e.preventDefault();
-    console.log("createCollab");
-    /* for (let i = 0; i < this.state.collabCount; i++){
-    }*/
+    this.setState({
+      collaboratorsToAdd: [
+        ...this.state.collaboratorsToAdd,
+        this.state.inputCollaborators
+      ],
+      inputCollaborators: ""
+    });
   };
 
   handleNameChange = event => {
@@ -38,13 +51,11 @@ export default class NewProjectForm extends Component {
     });
     this.setState({
       filteredCollaborators: this.state.users.filter(elem => {
-        return elem.firstName
-          .toUpperCase()
-          .includes(this.state.collabText.toUpperCase());
+        return elem.firstName.includes(this.state.collabText);
       })
     });
-    this.state.users.forEach(element => {
-      console.log(element.firstName, element.lastName);
+    this.setState({
+      inputCollaborators: [event.target.value]
     });
   };
 
@@ -57,7 +68,8 @@ export default class NewProjectForm extends Component {
             type="text"
             id="projectName"
             name="projectName"
-            onChange={this.handleChange}
+            value={this.state.projectName}
+            onChange={this.handleNameChange}
           ></input>
           <br />
           <div>
@@ -68,6 +80,7 @@ export default class NewProjectForm extends Component {
               type="text"
               id="collaborators"
               name="collabText"
+              value={this.state.inputCollaborators}
             ></input>
             <datalist id="users">
               {this.state.filteredCollaborators.map(user => {
@@ -77,9 +90,8 @@ export default class NewProjectForm extends Component {
               })}
             </datalist>
           </div>
-          <button onClick={this.createColaborators}>
-            add more collaborators
-          </button>
+          <button onClick={this.addColaborators}>add collaborator</button>
+          <button onClick={this.createProject}> create new Project</button>
         </form>
       </div>
     );
