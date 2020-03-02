@@ -36,12 +36,19 @@ export default class Signup extends Component {
         password: this.state.password
       })
       .then(response => {
-        this.props.history.push("/profile");
-        this.props.setUser(response.data);
+        console.log(response);
+        this.props.history.push("/profilepage");
+        //this.props.setUser(response.data);
       })
       .catch(err => {
+<<<<<<< HEAD
         this.setState({
           message: err.response?.data.message
+=======
+        console.log(err.message);
+        this.setState({
+          message: err.message
+>>>>>>> dd811207ddbd03053a96cdcb8fe106c83d3da9a1
         });
       });
   };

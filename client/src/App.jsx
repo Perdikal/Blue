@@ -22,6 +22,11 @@ class App extends React.Component {
     });
   };
 
+  deleteUserState() {
+    this.setState({
+      user: ""
+    });
+  }
   render() {
     return (
       <div className="App">
@@ -29,6 +34,19 @@ class App extends React.Component {
         <Route
           render={props => (
             <Navbar
+              history={props.history}
+              //{...props}
+              setUser={this.setUser}
+              user={this.state.user}
+              deleteUserState={this.deleteUserState}
+            />
+          )}
+        />
+        <Route
+          exact
+          path="/"
+          render={props => (
+            <Signup
               history={props.history}
               //{...props}
               setUser={this.setUser}
