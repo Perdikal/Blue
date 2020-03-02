@@ -1,9 +1,8 @@
-import React, { Component } from "react";
-import Info from "./info/Info";
-import Login from "./login/Login";
-import Signup from "./signup/Signup";
-import Steps from "./steps/Steps";
-import Navbar from "../Navbar/Navbar";
+import React, { Component } from 'react';
+import Info from './info/Info';
+import Signup from './signup/Signup';
+import Steps from './steps/Steps';
+import Navbar from '../Navbar/Navbar';
 
 export default class HomePage extends Component {
   state = {
@@ -18,6 +17,7 @@ export default class HomePage extends Component {
   render() {
     return (
       <div>
+        <Navbar />
         <Signup setUser={this.setUser} user={this.state.user} />
         <Info />
         <Steps />
