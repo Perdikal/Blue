@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Info from './info/Info';
-import Login from './login/Login';
+import Navbar from '../Navbar/Navbar';
 import Signup from './signup/Signup';
 import Steps from './steps/Steps';
 
@@ -17,7 +17,7 @@ export default class HomePage extends Component {
   render() {
     return (
       <div>
-        <Login />
+        <Navbar />
         <Signup setUser={this.setUser} user={this.state.user} />
         <Info />
         <Steps />
