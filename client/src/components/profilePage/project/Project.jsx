@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
+import React, { Component } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
 
 export default class Project extends Component {
   state = {
@@ -11,18 +11,20 @@ export default class Project extends Component {
   }
 
   getProjectData = () => {
-    axios.get('/project/bringmine').then(response => {
+    axios.get("/project/bringmine").then(response => {
       this.setState({
         projects: response.data
       });
     });
   };
+  createNewProject;
+
   render() {
     return (
       <div>
-        {/* {(this.state.projects.length < 3
-          ? this.state.project.slice(0)
-          : this.state.project.slice(0, 3)
+        {(this.state.projects.length < 3
+          ? this.state.projects.slice(0)
+          : this.state.projects.slice(0, 3)
         ).map(project => {
           return (
             <Link to={`/project/${project._id})`}>
@@ -32,7 +34,8 @@ export default class Project extends Component {
             </Link>
           );
         })}
-        <button>All projects</button> */}
+        <button>All projects</button>
+        <button>Create New Project</button>
       </div>
     );
   }

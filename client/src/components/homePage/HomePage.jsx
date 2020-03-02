@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import Info from './info/Info';
-import Navbar from '../Navbar/Navbar';
 import Signup from './signup/Signup';
 import Steps from './steps/Steps';
+import Navbar from '../Navbar/Navbar';
 
 export default class HomePage extends Component {
   state = {
