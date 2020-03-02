@@ -12,7 +12,7 @@ const loginCheck = (req, res, next) => {
   }
 };
 
-router.get("/newProjectMembers", (req, res) => {
+router.get("/allMembers", (req, res) => {
   //res.send("request received");
   console.log("request received");
 });

@@ -14,7 +14,7 @@ export default class Project extends Component {
 
   getProjectData = () => {
     axios
-      .get("/project/bringmine")
+      .get("/api/project/bringmine")
       .then(response => {
         this.setState({
           projects: response.data
@@ -33,7 +33,7 @@ export default class Project extends Component {
 
   createNewProject = () => {
     axios
-      .post("/project/newProject")
+      .post("/api/project/newProject")
       .then(response => {
         console.log(response);
       })
@@ -50,7 +50,7 @@ export default class Project extends Component {
           : this.state.projects.slice(0, 3)
         ).map(project => {
           return (
-            <Link to={`/project/${project._id})`}>
+            <Link to={`api/project/${project._id})`}>
               <div className="projectBox">
                 <span>{project.name}</span>
               </div>

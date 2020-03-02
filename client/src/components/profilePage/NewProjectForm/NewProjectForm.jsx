@@ -18,7 +18,7 @@ export default class NewProjectForm extends Component {
       [event.target.name]: event.target.value
     });
 
-    axios.get("/newProjectMembers").then(response => {
+    axios.get("/api/allMembers").then(response => {
       console.log(response);
       //here we will show the list of names matching the query});
     });
