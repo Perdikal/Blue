@@ -17,7 +17,6 @@ export default class HomePage extends Component {
   render() {
     return (
       <div>
-        <Navbar setUser={this.setUser} user={this.state.user} />
         <Signup setUser={this.setUser} user={this.state.user} />
         <Info />
         <Steps />
