@@ -4,8 +4,26 @@ import axios from "axios";
 export default class NewProjectForm extends Component {
   state = {
     projectName: "",
+    collabText: "",
     collaborators: [],
-    users: []
+    users: [],
+    filteredCollaborators: [],
+    collabCount: 1
+  };
+
+  componentDidMount() {
+    axios.get("/api/allMembers").then(response => {
+      this.setState({
+        users: response.data
+      });
+    });
+  }
+
+  createColaborators = e => {
+    e.preventDefault();
+    console.log("createCollab");
+    /* for (let i = 0; i < this.state.collabCount; i++){
+    }*/
   };
 
   handleNameChange = event => {
@@ -14,17 +32,19 @@ export default class NewProjectForm extends Component {
     });
   };
 
-  componentDidMount() {
-    axios.get("/api/allMembers").then(response => {
-      this.setState({
-        userNames: response.data
-      });
-    });
-  }
-
   handleCollabChange = event => {
     this.setState({
       [event.target.name]: event.target.value
+    });
+    this.setState({
+      filteredCollaborators: this.state.users.filter(elem => {
+        return elem.firstName
+          .toUpperCase()
+          .includes(this.state.collabText.toUpperCase());
+      })
+    });
+    this.state.users.forEach(element => {
+      console.log(element.firstName, element.lastName);
     });
   };
 
@@ -40,13 +60,26 @@ export default class NewProjectForm extends Component {
             onChange={this.handleChange}
           ></input>
           <br />
-          <label htmlFor="collaborators">Project's collaborators:</label>
-          <input
-            onChange={this.handleCollabChange}
-            type="text"
-            id="collaborators"
-            name="collaborators"
-          ></input>
+          <div>
+            <label htmlFor="collaborators">Project's collaborators:</label>
+            <input
+              list="users"
+              onChange={this.handleCollabChange}
+              type="text"
+              id="collaborators"
+              name="collabText"
+            ></input>
+            <datalist id="users">
+              {this.state.filteredCollaborators.map(user => {
+                return (
+                  <option value={`${user.firstName} ${user.lastName}`}></option>
+                );
+              })}
+            </datalist>
+          </div>
+          <button onClick={this.createColaborators}>
+            add more collaborators
+          </button>
         </form>
       </div>
     );

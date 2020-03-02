@@ -73,6 +73,7 @@ router.post("/login", (req, res, next) => {
 // >>>>>>>>>>>>>>>>>>  LOGOUT  <<<<<<<<<<<<<<<<<<<<<
 
 router.delete("/logout", (req, res) => {
+  console.log("HELLOOOOO?");
   req.logout();
   res.json({ message: "Successful logout" });
 });
