@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
 import NewTask from '../newTask/NewTask';
 
 export default class Task extends Component {
@@ -23,7 +22,7 @@ export default class Task extends Component {
 
   getTaskData = () => {
     axios
-      .get(`/project/${this.props.propsId}/tasks`)
+      .get(`/project/${this.props.params.id}/tasks`)
       .then(response => {
         this.setState({
           tasks: response.data
@@ -42,7 +41,7 @@ export default class Task extends Component {
 
   createTask = () => {
     axios
-      .post(`/project/${this.props.propsId}/createTask`)
+      .post(`/project/${this.props.params.id}/createTask`)
       .then(response => {
         console.log(response);
       })

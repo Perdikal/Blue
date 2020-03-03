@@ -1,19 +1,21 @@
-import React from "react";
-import { Route } from "react-router-dom";
-import "./App.css";
-import Navbar from "./components/Navbar/Navbar";
-import Footer from "./components/footer/Footer";
-import HomePage from "./components/homePage/HomePage";
-import ProfilePage from "./components/profilePage/ProfilePage";
-import TaskDashboard from "./components/tasksDashboard/TaskDashboard";
+import React from 'react';
+import { Route } from 'react-router-dom';
+import './App.css';
+import Navbar from './components/Navbar/Navbar';
+import Footer from './components/footer/Footer';
+import HomePage from './components/homePage/HomePage';
+import ProfilePage from './components/profilePage/ProfilePage';
+import TaskDashboard from './components/tasksDashboard/TaskDashboard';
 
-import Signup from "./components/homePage/signup/Signup";
-import Steps from "./components/homePage/steps/Steps";
-import Info from "./components/homePage/info/Info";
+import Signup from './components/homePage/signup/Signup';
+import Steps from './components/homePage/steps/Steps';
+import Info from './components/homePage/info/Info';
+import Project from './components/profilePage/project/Project';
 
 class App extends React.Component {
   state = {
     user: this.props.user
+    // projects: this.props.project
   };
 
   setUser = userObj => {
@@ -65,6 +67,12 @@ class App extends React.Component {
           path="/project/:id"
           render={props => <TaskDashboard {...props} user={this.state.user} />}
         />
+        <Route
+          exact
+          path="/projects"
+          render={props => <Project {...props} user={this.state.user} />}
+        />
+
         <Footer />
       </div>
     );
