@@ -8,7 +8,7 @@ export default class TaskDashboard extends Component {
     return (
       <div>
         <Log />
-        {/*        <Route
+        {/* <Route
           exact
           path="/project/:projectId"
           render={props => (
