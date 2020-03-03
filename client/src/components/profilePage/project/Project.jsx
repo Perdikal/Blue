@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
-import NewProjectForm from '../NewProjectForm/NewProjectForm';
+import React, { Component } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
+import NewProjectForm from "../NewProjectForm/NewProjectForm";
 
 export default class Project extends Component {
   state = {
@@ -13,7 +13,7 @@ export default class Project extends Component {
   }
 
   updateAddedProjects = project => {
-    console.log('Does this even work');
+    console.log("Does this even work");
     this.state.projects.push(project);
     this.setState({
       projects: this.state.projects,
@@ -23,7 +23,7 @@ export default class Project extends Component {
 
   getProjectData = () => {
     axios
-      .get('/api/project/bringmine')
+      .get("/api/project/bringmine")
       .then(response => {
         this.setState({
           projects: response.data
@@ -42,7 +42,7 @@ export default class Project extends Component {
 
   createProject = () => {
     axios
-      .post('/api/project/createProject')
+      .post("/api/project/createProject")
       .then(response => {
         console.log(response);
       })
@@ -59,7 +59,7 @@ export default class Project extends Component {
           : this.state.projects.slice(0, 3)
         ).map(project => {
           return (
-            <Link to={`api/project/${project._id})`}>
+            <Link to={`api/project/${project._id}`}>
               <div className="projectBox">
                 <span>{project.name}</span>
               </div>
@@ -72,7 +72,7 @@ export default class Project extends Component {
         {this.state.showForm ? (
           <NewProjectForm updateAddedProjects={this.updateAddedProjects} />
         ) : (
-          ''
+          ""
         )}
       </div>
     );
