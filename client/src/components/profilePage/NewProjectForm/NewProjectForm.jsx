@@ -1,10 +1,10 @@
-import React, { Component } from "react";
-import axios from "axios";
+import React, { Component } from 'react';
+import axios from 'axios';
 
 export default class NewProjectForm extends Component {
   state = {
-    projectName: "",
-    collabText: "",
+    projectName: '',
+    collabText: '',
     inputCollaborators: [],
     users: [],
     filteredCollaborators: [],
@@ -12,30 +12,47 @@ export default class NewProjectForm extends Component {
   };
 
   componentDidMount() {
-    axios.get("/api/allMembers").then(response => {
+    axios.get('/api/allMembers').then(response => {
       this.setState({
         users: response.data
       });
     });
   }
 
-  createProject = () => {
+  createProject = event => {
+    event.preventDefault();
+
+    console.log(
+      'Markus',
+      this.state.projectName,
+      this.state.collaboratorsToAdd
+    );
+
     axios
-      .post("/api/project/createProject", {
+      .post('/api/project/createProject', {
         name: this.state.projectName,
         members: this.state.collaboratorsToAdd
       })
-      .then(response => {});
+      .then(response => {
+        console.log(response.data);
+        this.props.updateAddedProjects(response.data);
+      });
   };
 
   addColaborators = e => {
     e.preventDefault();
+    console.log(
+      'addCola',
+      this.state.inputCollaborators,
+      this.state.collaboratorsToAdd
+    );
     this.setState({
       collaboratorsToAdd: [
         ...this.state.collaboratorsToAdd,
         this.state.inputCollaborators
       ],
-      inputCollaborators: ""
+      collabText: '',
+      inputCollaborators: ''
     });
   };
 
@@ -47,17 +64,22 @@ export default class NewProjectForm extends Component {
 
   handleCollabChange = event => {
     this.setState({
-      [event.target.name]: event.target.value
-    });
-    this.setState({
+      [event.target.name]: event.target.value,
       filteredCollaborators: this.state.users.filter(elem => {
         return elem.firstName.includes(this.state.collabText);
-      })
-    });
-    this.setState({
-      inputCollaborators: [event.target.value]
+      }),
+      inputCollaborators: event.target.value
     });
   };
+
+  /*   handleAddCollab = event => {
+    event.preventDefault();
+    this.state.inputCollaborators.push(this.state.collabText);
+    this.setState({
+      inputCollaborators: this.state.inputCollaborators,
+      collabText: ''
+    });
+  }; */
 
   render() {
     return (
@@ -80,7 +102,7 @@ export default class NewProjectForm extends Component {
               type="text"
               id="collaborators"
               name="collabText"
-              value={this.state.inputCollaborators}
+              value={this.inputCollaborators}
             ></input>
             <datalist id="users">
               {this.state.filteredCollaborators.map(user => {
@@ -89,6 +111,12 @@ export default class NewProjectForm extends Component {
                 );
               })}
             </datalist>
+            {/*     <button onClick={this.handleAddCollab}>Add</button> */}
+          </div>
+          <div>
+            {this.state.collaboratorsToAdd.map(ele => {
+              return <p>{ele}</p>;
+            })}
           </div>
           <button onClick={this.addColaborators}>add collaborator</button>
           <button onClick={this.createProject}> create new Project</button>
