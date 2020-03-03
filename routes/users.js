@@ -8,7 +8,7 @@ const User = require("../models/User");
 
 router.post("/signup", (req, res) => {
   console.log("it works", req.body);
-  const { firstName, lastName, email, password } = req.body;
+  const { firstName, lastName, email, password, role } = req.body;
 
   if (!email) {
     return res.status(400).json({ message: "email can't be empty" });
@@ -31,6 +31,7 @@ router.post("/signup", (req, res) => {
           return User.create({
             firstName: firstName,
             lastName: lastName,
+            role: role,
             email: email,
             password: hash
           });

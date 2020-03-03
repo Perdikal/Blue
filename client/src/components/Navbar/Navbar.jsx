@@ -13,6 +13,7 @@ export default class Navbar extends Component {
   };
 
   render() {
+    console.log("Button");
     return (
       <div>
         {this.props.user ? (
