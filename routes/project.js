@@ -42,7 +42,7 @@ projects.push(Project)
 router.post("/project/createProject", (req, res) => {
   const { name, members } = req.body;
   const membersId = members.map(member => {
-    console.log(member.split(" ").slice(0, 1));
+    //console.log(member.split(" ").slice(0, 1));
     //return User.find({});
   });
   Project.create({
