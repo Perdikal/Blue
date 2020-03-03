@@ -86,6 +86,8 @@ router.post('/project/:id/createtask', loginCheck, (req, res) => {
   const projectId = req.params.id;
   const id = req.user._id;
   const { title, description, assignee, status } = req.body;
+
+  console.log(title, description, assignee, status)
   Task.create({
     title: title,
     description: description,

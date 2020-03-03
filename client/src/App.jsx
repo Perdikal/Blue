@@ -24,7 +24,7 @@ class App extends React.Component {
 
   deleteUserState() {
     this.setState({
-      user: ""
+      user: ''
     });
   }
   render() {
@@ -60,7 +60,11 @@ class App extends React.Component {
           path="/profilepage"
           render={props => <ProfilePage {...props} user={this.state.user} />}
         />
-        <TaskDashboard /> {/* NEED A ROUTE */}
+        <Route
+          exact
+          path="/project/:id"
+          render={props => <TaskDashboard {...props} user={this.state.user} />}
+        />
         <Footer />
       </div>
     );
