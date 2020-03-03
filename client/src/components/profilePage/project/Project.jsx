@@ -67,6 +67,7 @@ export default class Project extends Component {
           );
         })}
         <button>All projects</button>
+
         <button onClick={this.showForm}>Create New Project</button>
         {this.state.showForm ? (
           <NewProjectForm updateAddedProjects={this.updateAddedProjects} />
