@@ -12,6 +12,15 @@ export default class Project extends Component {
     this.getProjectData();
   }
 
+  updateAddedProjects = project => {
+    console.log('Does this even work');
+    this.state.projects.push(project);
+    this.setState({
+      projects: this.state.projects,
+      showForm: false
+    });
+  };
+
   getProjectData = () => {
     axios
       .get('/api/project/bringmine')
@@ -31,9 +40,9 @@ export default class Project extends Component {
     });
   };
 
-  createNewProject = () => {
+  createProject = () => {
     axios
-      .post('/api/project/createNewProject')
+      .post('/api/project/createProject')
       .then(response => {
         console.log(response);
       })
@@ -59,7 +68,11 @@ export default class Project extends Component {
         })}
         <button>All projects</button>
         <button onClick={this.showForm}>Create New Project</button>
-        {this.state.showForm ? <NewProjectForm /> : ''}
+        {this.state.showForm ? (
+          <NewProjectForm updateAddedProjects={this.updateAddedProjects} />
+        ) : (
+          ''
+        )}
       </div>
     );
   }
