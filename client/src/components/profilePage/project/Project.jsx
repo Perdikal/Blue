@@ -14,6 +14,10 @@ export default class Project extends Component {
   }
 
   updateAddedProjects = project => {
+<<<<<<< HEAD
+=======
+    console.log("Does this even work");
+>>>>>>> 09d2eb5cc90871848f3f50207b206dbe9e990810
     this.state.projects.push(project);
     this.setState({
       projects: this.state.projects,
@@ -25,6 +29,7 @@ export default class Project extends Component {
     axios
       .get("/api/projects")
       .then(response => {
+        console.log(response.data);
         this.setState({
           projects: response.data
         });
@@ -71,10 +76,7 @@ export default class Project extends Component {
           })
         ) : (
           <>
-            {(this.state.projects.length < 3
-              ? this.state.projects.slice(0)
-              : this.state.projects.slice(0, 3)
-            ).map(project => {
+            {this.state.projects.slice(0, 3).map(project => {
               return (
                 <Link to={`project/${project._id}`}>
                   <div className="projectBox">

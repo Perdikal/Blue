@@ -69,11 +69,11 @@ export default class TaskDashboard extends Component {
       </DragDropContext>
 =======
       <div>
+        <Log params={this.props.match.params} />
         <Task
           params={this.props.match.params}
           updateAddedTasks={this.updateAddedTasks}
         />
-        <Log />
       </div>
 >>>>>>> 59affa84c17ae85cbde76c679531201c9b6dbaa6
     );

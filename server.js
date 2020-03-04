@@ -1,7 +1,6 @@
 require("dotenv").config();
 
 require("./db"); // will run the code in `./db/index.js` (which is the database connection logic)
-require("./passport");
 
 const express = require("express");
 const logger = require("morgan");
@@ -9,6 +8,7 @@ const logger = require("morgan");
 const app = express();
 
 require("./session")(app);
+require("./passport");
 
 app.use(express.urlencoded({ extended: true })); // sets the `body` object in the `request` with the values from an HTML POST form
 
