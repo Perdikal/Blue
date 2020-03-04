@@ -11,7 +11,7 @@ export default class ProfilePage extends Component {
     return (
       <div>
         <UserInfo setUser={this.props.setUser} user={this.props.user} />
-        <Project />
+        <Project user={this.props.user} />
       </div>
     );
   }

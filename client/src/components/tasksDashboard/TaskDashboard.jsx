@@ -1,6 +1,7 @@
-import React, { Component } from "react";
-import Task from "./task/Task";
-import Log from "./logComp/Log";
+import React, { Component } from 'react';
+import Task from './task/Task';
+import Log from './logComp/Log';
+import axios from 'axios';
 
 export default class TaskDashboard extends Component {
   state = {
@@ -9,7 +10,7 @@ export default class TaskDashboard extends Component {
   };
 
   updateAddedTasks = task => {
-    console.log("Does this even work");
+    console.log('Does this even work');
     this.state.tasks.push(task);
     this.setState({
       tasks: this.state.tasks,
@@ -17,8 +18,24 @@ export default class TaskDashboard extends Component {
     });
   };
 
+  deleteProject = () => {
+    console.log('whateverdeleteteeeeee', this.props.user.projects);
+    const id = this.props.match.params.id;
+
+    axios
+      .post(`/api/project/${id}/delete`)
+      .then(response => {
+        console.log(response);
+        console.log(this.props.history);
+        this.props.history.push('/profilepage');
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  };
   render() {
     console.log(this.props.match.params.id);
+
     return (
       <div>
         <Log params={this.props.match.params} />
@@ -26,6 +43,9 @@ export default class TaskDashboard extends Component {
           params={this.props.match.params}
           updateAddedTasks={this.updateAddedTasks}
         />
+        <div>
+          <button onClick={this.deleteProject}>Delete this project</button>
+        </div>
       </div>
     );
   }
