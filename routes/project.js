@@ -81,7 +81,6 @@ router.get("/projects", loginCheck, (req, res) => {
 });
 
 router.get("/project/bringmine", loginCheck, (req, res) => {
-  console.log("Hellooo+");
   Project.find({ members: req.user._id })
     .then(projectList => {
       res.json(projectList);
@@ -94,27 +93,32 @@ router.get("/project/bringmine", loginCheck, (req, res) => {
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<  TASK  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 router.post("/project/:id/createtask", loginCheck, (req, res) => {
+  let assigneeId = "";
   const projectId = req.params.id;
-  const id = req.user._id;
   const { title, description, assignee, status } = req.body;
-
-  console.log(title, description, assignee, status);
-  Task.create({
-    title: title,
-    description: description,
-    assignee: assignee,
-    status: status,
-    author: id
-  }).then(task => {
-    Project.findByIdAndUpdate(projectId, { $push: { tasks: task._id } }).then(
-      () => {
-        res.json({ message: "Alles good" });
-      }
-    );
+  console.log(assignee);
+  User.findOne({ firstName: assignee.split(" ")[0] }).then(result => {
+    Task.create({
+      project: projectId,
+      title: title,
+      description: description,
+      assignee: result._id,
+      author: req.user._id
+    })
+      .then(task => {
+        Project.findByIdAndUpdate(projectId, {
+          $push: { tasks: task._id }
+        });
+        res.json(task);
+      })
+      .catch(err => {
+        console.error(err);
+      });
   });
 });
 
 router.get("/project/:id/tasks", loginCheck, (req, res) => {
+  console.log(req.params.id);
   const projectId = req.params.id;
   Task.find({ project: projectId }).then(taskList => {
     res.json(taskList);
@@ -134,7 +138,6 @@ router.post("/project/:id/changestatus/:taskid", loginCheck, (req, res) => {
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<  LOG  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 router.get("/project/:id/log", loginCheck, (req, res) => {
-  console.log("response");
   const projectId = req.params.id;
   Log.find({ project: projectId })
     .then(logs => {
@@ -146,7 +149,6 @@ router.get("/project/:id/log", loginCheck, (req, res) => {
 });
 
 router.post("/project/:id/log", loginCheck, (req, res) => {
-  console.log("request recieved");
   const projectId = req.params.id;
   const { comment } = req.body;
   Log.create({

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-
+import { Label, Form } from "./SignupStyle";
 export default class Signup extends Component {
   state = {
     firstName: "",
@@ -52,8 +52,8 @@ export default class Signup extends Component {
   render() {
     return (
       <div>
-        <form onSubmit={this.handleSubmit}>
-          <label htmlFor="firstName">First Name: </label>
+        <Form onSubmit={this.handleSubmit}>
+          <Label htmlFor="firstName">First Name: </Label>
           <input
             type="text"
             id="firstName"
@@ -61,7 +61,7 @@ export default class Signup extends Component {
             value={this.state.firstName}
             onChange={this.handleChange}
           />
-          <label htmlFor="lasttName">Last Name: </label>
+          <Label htmlFor="lasttName">Last Name: </Label>
           <input
             type="text"
             id="lastName"
@@ -69,7 +69,7 @@ export default class Signup extends Component {
             value={this.state.lastName}
             onChange={this.handleChange}
           />
-          <label htmlFor="role">Role: </label>
+          <Label htmlFor="role">Role: </Label>
           <input
             type="text"
             id="role"
@@ -77,7 +77,7 @@ export default class Signup extends Component {
             value={this.state.role}
             onChange={this.handleChange}
           />
-          <label htmlFor="isManager">Are you a Manager?</label>
+          <Label htmlFor="isManager">Are you a Manager?</Label>
           <input
             type="checkbox"
             id="isManager"
@@ -85,7 +85,7 @@ export default class Signup extends Component {
             checked={this.state.isManager}
             onChange={this.handleCheck}
           />
-          <label htmlFor="email">Email: </label>
+          <Label htmlFor="email">Email: </Label>
           <input
             type="email"
             id="email"
@@ -93,7 +93,7 @@ export default class Signup extends Component {
             value={this.state.email}
             onChange={this.handleChange}
           />
-          <label htmlFor="password">Password: </label>
+          <Label htmlFor="password">Password: </Label>
           <input
             type="password"
             id="password"
@@ -103,7 +103,7 @@ export default class Signup extends Component {
           />
           <button type="submit">Create</button>
           {this.state.message && <p>{this.state.message}</p>}
-        </form>
+        </Form>
         <a href={process.env.REACT_APP_SERVER_URL + "/api/auth/linkedin"}>
           Login via Linkedin
         </a>
