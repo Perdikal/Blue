@@ -21,8 +21,7 @@ export default class Task extends Component {
   // }
 
   updateAddedTasks = task => {
-    //console.log("show me the tasks");
-    //this.state.tasks.push(task);
+    this.state.tasks.push(task);
     this.setState({
       tasks: [...this.state.tasks, task],
       showForm: false
@@ -34,7 +33,7 @@ export default class Task extends Component {
       .get(`/api/project/${this.props.params.id}/tasks`)
       .then(response => {
         this.setState({
-          tasks: response.data
+          tasks: response.data //push?
         });
       })
       .catch(err => {

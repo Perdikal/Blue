@@ -14,7 +14,6 @@ const loginCheck = (req, res, next) => {
 
 router.get("/allMembers", (req, res) => {
   User.find({}).then(response => {
-    console.log(response);
     res.json(response);
   });
 });
@@ -22,7 +21,6 @@ router.get("/allMembers", (req, res) => {
 router.post("/project/createProject", loginCheck, (req, res) => {
   const { name, members } = req.body;
   const membersId = members.map(member => {
-    console.log(member.split(" "));
     return member.split();
     //return User.find({});
   });
@@ -31,25 +29,18 @@ router.post("/project/createProject", loginCheck, (req, res) => {
 
   Promise.all(
     members.map(member => {
-      console.log(member);
       let firstName = member.split(" ")[0];
       let lastName = member.split(" ")[1];
-      console.log(firstName);
-      console.log(lastName);
       return new Promise(function(res, req) {
-        console.log(member[0], member[1]);
         let userFind = User.find({ firstName: firstName, lastName: lastName });
         res(userFind);
       });
     })
   ).then(result => {
-    console.log("RESULLLSLL", result);
-
     let idArray = result.map(member => {
       return member[0]._id;
     });
 
-    console.log(idArray);
     Project.create({
       name: name,
       members: [...idArray], //[...idArray, req.user._id], I removed req.user._id so it adds the project only once to the user's project array
@@ -58,9 +49,7 @@ router.post("/project/createProject", loginCheck, (req, res) => {
       project.members.forEach(member => {
         User.findByIdAndUpdate(member, {
           $push: { projects: project._id }
-        }).then(updated => {
-          console.log("user has been updated!", updated);
-        });
+        }).then(updated => {});
       });
 
       res.json(project);
@@ -88,13 +77,10 @@ router.get("/project/bringmine", loginCheck, (req, res) => {
     });
 });
 
-// <<<<<<<<<<<<<<<<<<<<<<<<<<<<  TASK  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
 router.post("/project/:id/createtask", loginCheck, (req, res) => {
-  let assigneeId = "";
   const projectId = req.params.id;
   const { title, description, assignee, status } = req.body;
-  console.log(assignee);
+  /*   console.log(assignee);
   User.findOne({ firstName: assignee.split(" ")[0] }).then(result => {
     Task.create({
       project: projectId,
@@ -112,11 +98,23 @@ router.post("/project/:id/createtask", loginCheck, (req, res) => {
       .catch(err => {
         console.error(err);
       });
+*/
+  Task.create({
+    title: title,
+    description: description,
+    assignee: assignee,
+    status: status,
+    author: id
+  }).then(task => {
+    Project.findByIdAndUpdate(projectId, { $push: { tasks: task._id } }).then(
+      () => {
+        res.json({ message: "Alles good" });
+      }
+    );
   });
 });
 
 router.get("/project/:id/tasks", loginCheck, (req, res) => {
-  console.log(req.params.id);
   const projectId = req.params.id;
   Task.find({ project: projectId }).then(taskList => {
     res.json(taskList);
@@ -124,7 +122,6 @@ router.get("/project/:id/tasks", loginCheck, (req, res) => {
 });
 
 router.post("/project/:id/changestatus/:taskid", loginCheck, (req, res) => {
-  console.log("received");
   const ticketId = req.params.taskid;
   const { status } = req.body;
   Task.findById(ticketId).then(ticket => {
