@@ -33,16 +33,16 @@ export default class Log extends Component {
     });
   };
 
-  handleSubmit = comment => {
+  /* handleSubmit = comment => {
     comment.preventDefault();
 
     axios.post("/project/:id/log"),
       {
         author: this.state.author,
         comment: this.state.comment,
-        project: projectId
+        project: this.props.params.id
       };
-  };
+  }; */
 
   updateAddedComment = log => {
     this.state.log.push(log);
