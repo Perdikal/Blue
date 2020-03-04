@@ -1,7 +1,20 @@
-import React from 'react';
+import React, { Component } from 'react';
+import axios from 'axios';
+import NewTask from '../newTask/NewTask';
 
-const Log = () => {
-  return <div></div>;
-};
+export default class Log extends Component {
+  state = {
+    author: '',
+    comment: '',
+    status: ''
+  };
 
-export default Log;
+  render() {
+    console.log(this.props);
+    return (
+      <div>
+        <h4>Activity History:</h4>
+      </div>
+    );
+  }
+}

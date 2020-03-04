@@ -10,10 +10,12 @@ import TaskDashboard from './components/tasksDashboard/TaskDashboard';
 import Signup from './components/homePage/signup/Signup';
 import Steps from './components/homePage/steps/Steps';
 import Info from './components/homePage/info/Info';
+import Project from './components/profilePage/project/Project';
 
 class App extends React.Component {
   state = {
     user: this.props.user
+    // projects: this.props.project
   };
 
   setUser = userObj => {
@@ -24,7 +26,7 @@ class App extends React.Component {
 
   deleteUserState() {
     this.setState({
-      user: ""
+      user: ''
     });
   }
   render() {
@@ -60,7 +62,17 @@ class App extends React.Component {
           path="/profilepage"
           render={props => <ProfilePage {...props} user={this.state.user} />}
         />
-        <TaskDashboard /> {/* NEED A ROUTE */}
+        <Route
+          exact
+          path="/project/:id"
+          render={props => <TaskDashboard {...props} user={this.state.user} />}
+        />
+        <Route
+          exact
+          path="/projects"
+          render={props => <Project {...props} user={this.state.user} />}
+        />
+
         <Footer />
       </div>
     );
