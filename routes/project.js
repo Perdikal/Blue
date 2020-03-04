@@ -69,6 +69,17 @@ router.post('/project/createProject', loginCheck, (req, res) => {
   });
 });
 
+router.get('/projects', loginCheck, (req, res) => {
+  console.log('All of the projects');
+  Project.find({ members: { $in: [req.user._id] } })
+    .then(projectList => {
+      res.json(projectList);
+    })
+    .catch(err => {
+      console.error(err);
+    });
+});
+
 router.get('/project/bringmine', loginCheck, (req, res) => {
   console.log('Hellooo+');
   Project.find({ members: req.user._id })
@@ -87,7 +98,7 @@ router.post('/project/:id/createtask', loginCheck, (req, res) => {
   const id = req.user._id;
   const { title, description, assignee, status } = req.body;
 
-  console.log(title, description, assignee, status)
+  console.log(title, description, assignee, status);
   Task.create({
     title: title,
     description: description,

@@ -1,19 +1,20 @@
-import React, { Component } from "react";
-import axios from "axios";
-import { Link } from "react-router-dom";
-import NewProjectForm from "../NewProjectForm/NewProjectForm";
+import React, { Component } from 'react';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
+import NewProjectForm from '../NewProjectForm/NewProjectForm';
 
 export default class Project extends Component {
   state = {
     projects: [],
-    showForm: false
+    showForm: false,
+    showAll: false
   };
   componentDidMount() {
     this.getProjectData();
   }
 
   updateAddedProjects = project => {
-    console.log("Does this even work");
+    console.log('Does this even work');
     this.state.projects.push(project);
     this.setState({
       projects: this.state.projects,
@@ -23,7 +24,7 @@ export default class Project extends Component {
 
   getProjectData = () => {
     axios
-      .get("/api/project/bringmine")
+      .get('/api/projects')
       .then(response => {
         this.setState({
           projects: response.data
@@ -32,6 +33,11 @@ export default class Project extends Component {
       .catch(err => {
         console.error(err);
       });
+  };
+  getAll = () => {
+    this.setState({
+      showAll: !this.state.showAll
+    });
   };
 
   showForm = () => {
@@ -42,7 +48,7 @@ export default class Project extends Component {
 
   createProject = () => {
     axios
-      .post("/api/project/createProject")
+      .post('/api/project/createProject')
       .then(response => {
         console.log(response);
       })
@@ -54,25 +60,39 @@ export default class Project extends Component {
   render() {
     return (
       <div>
-        {(this.state.projects.length < 3
-          ? this.state.projects.slice(0)
-          : this.state.projects.slice(0, 3)
-        ).map(project => {
-          return (
-            <Link to={`project/${project._id}`}>
-              <div className="projectBox">
-                <span>{project.name}</span>
-              </div>
-            </Link>
-          );
-        })}
-        <button>All projects</button>
+        {this.state.showAll ? (
+          this.state.projects.map(project => {
+            return (
+              <Link to={`project/${project._id}`}>
+                <div className="projectBox">
+                  <span>{project.name}</span>
+                </div>
+              </Link>
+            );
+          })
+        ) : (
+          <>
+            {(this.state.projects.length < 3
+              ? this.state.projects.slice(0)
+              : this.state.projects.slice(0, 3)
+            ).map(project => {
+              return (
+                <Link to={`project/${project._id}`}>
+                  <div className="projectBox">
+                    <span>{project.name}</span>
+                  </div>
+                </Link>
+              );
+            })}
+          </>
+        )}
+        <button onClick={this.getAll}>All projects</button>
 
         <button onClick={this.showForm}>Create New Project</button>
         {this.state.showForm ? (
           <NewProjectForm updateAddedProjects={this.updateAddedProjects} />
         ) : (
-          ""
+          ''
         )}
       </div>
     );

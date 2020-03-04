@@ -117,7 +117,7 @@ export default class NewTask extends Component {
               return <p>{member}</p>;
             })}
           </div>
-          <button onClick={this.createTask}> Create Task</button>
+          <button onClick={this.createTask}>Create Task</button>
         </form>
       </div>
     );
