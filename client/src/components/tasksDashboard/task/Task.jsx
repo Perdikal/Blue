@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
 import NewTask from "../newTask/NewTask";
+import { Droppable } from "react-beautiful-dnd";
+import { Draggable } from "react-beautiful-dnd";
 
 export default class Task extends Component {
   state = {
@@ -10,6 +12,13 @@ export default class Task extends Component {
   componentDidMount() {
     this.getTaskData();
   }
+
+  // componentWillUpdate(prevProps, prevState) {
+  //   if (prevState.tasks !== this.state.tasks) {
+  //     console.log(prevState.tasks, this.state.tasks);
+  //     this.getTaskData();
+  //   }
+  // }
 
   updateAddedTasks = task => {
     //console.log("show me the tasks");
@@ -25,7 +34,7 @@ export default class Task extends Component {
       .get(`/api/project/${this.props.params.id}/tasks`)
       .then(response => {
         this.setState({
-          tasks: [...response.data]
+          tasks: response.data
         });
       })
       .catch(err => {
@@ -33,6 +42,9 @@ export default class Task extends Component {
       });
   };
 
+  /* Task() {
+    return <h1> </h1>;
+  } */
   showForm = () => {
     this.setState({
       showForm: !this.state.showForm
@@ -53,20 +65,84 @@ export default class Task extends Component {
   render() {
     return (
       <div>
+        <Droppable droppableId="toDoId">
+          {provided => (
+            <div {...provided.droppableProps} ref={provided.innerRef}>
+              <h2>To dos:</h2>
+              {this.state.tasks.map((task, index) => {
+                if (task.status === "to-do") {
+                  return (
+                    <Draggable index={index} draggableId={String(task._id)}>
+                      {provided => (
+                        <div
+                          ref={provided.innerRef}
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
+                        >
+                          <div id="{task._id}">{task.title}</div>
+                        </div>
+                      )}
+                    </Draggable>
+                  );
+                }
+              })}
+              {provided.placeholder}
+            </div>
+          )}
+        </Droppable>
         <div>
-          <h2>To dos:</h2>
-          {this.state.tasks.map(task => {
-            if (task.status === "to-do") {
-              //console.log("true");
-              return <div draggable="true">{task.title}</div>;
-            }
-          })}
+          <Droppable droppableId="doingId">
+            {provided => (
+              <div {...provided.droppableProps} ref={provided.innerRef}>
+                <h2>Doing:</h2>
+                {this.state.tasks.map((task, index) => {
+                  if (task.status === "doing") {
+                    return (
+                      <Draggable index={index} draggableId={String(task._id)}>
+                        {provided => (
+                          <div
+                            ref={provided.innerRef}
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                          >
+                            <div id="{task._id}">{task.title}</div>
+                          </div>
+                        )}
+                      </Draggable>
+                    );
+                  }
+                })}
+                {provided.placeholder}
+              </div>
+            )}
+          </Droppable>
         </div>
         <div>
-          <h2>Doing:</h2>
-        </div>
-        <div>
-          <h2>Done:</h2>
+          <Droppable droppableId="doneId">
+            {provided => (
+              <div {...provided.droppableProps} ref={provided.innerRef}>
+                <h2>Done:</h2>
+                {this.state.tasks.map((task, index) => {
+                  if (task.status === "done") {
+                    return (
+                      <Draggable index={index} draggableId={String(task._id)}>
+                        {provided => (
+                          <div
+                            ref={provided.innerRef}
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                          >
+                            <div id="{task._id}">{task.title}</div>
+                          </div>
+                        )}
+                      </Draggable>
+                    );
+                  }
+                })}
+                {provided.placeholder}
+              </div>
+            )}
+          </Droppable>
         </div>
         {/* {this.state.tasks.length.map(task => {
           return <span>{task.name}</span>;

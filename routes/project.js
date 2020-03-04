@@ -124,11 +124,12 @@ router.get("/project/:id/tasks", loginCheck, (req, res) => {
 });
 
 router.post("/project/:id/changestatus/:taskid", loginCheck, (req, res) => {
+  console.log("received");
   const ticketId = req.params.taskid;
   const { status } = req.body;
   Task.findById(ticketId).then(ticket => {
-    ticket.update({ status: status }).then(task => {
-      res.json(task);
+    ticket.updateOne({ status: status }).then(task => {
+      //res.json(task);
     });
   });
 });
