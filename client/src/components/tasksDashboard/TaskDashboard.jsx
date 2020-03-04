@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import Task from './task/Task';
-import Log from './logComp/Log';
+import React, { Component } from "react";
+import Task from "./task/Task";
+import Log from "./logComp/Log";
 
 export default class TaskDashboard extends Component {
   state = {
@@ -9,7 +9,7 @@ export default class TaskDashboard extends Component {
   };
 
   updateAddedTasks = task => {
-    console.log('Does this even work');
+    console.log("Does this even work");
     this.state.tasks.push(task);
     this.setState({
       tasks: this.state.tasks,
@@ -21,7 +21,7 @@ export default class TaskDashboard extends Component {
     console.log(this.props.match.params.id);
     return (
       <div>
-        <Log />
+        <Log params={this.props.match.params} />
         <Task
           params={this.props.match.params}
           updateAddedTasks={this.updateAddedTasks}

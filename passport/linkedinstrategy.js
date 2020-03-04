@@ -10,14 +10,15 @@ passport.use(
       clientID: process.env.client_id,
       clientSecret: process.env.client_secret,
       callbackURL: "http://127.0.0.1:3001/api/auth/linkedin/callback",
-      scope: ["r_emailaddress", "r_liteprofile", "r_basicprofile"]
+      scope: ["r_emailaddress", "r_liteprofile"],
+      state: true
     },
     function(token, tokenSecret, profile, done) {
-      console.log(profile);
+      console.log("1");
       User.findOne({ linkedinId: profile.id })
         .then(user => {
           if (user) {
-            done(null, user);
+            return done(null, user);
           }
 
           return User.create({
@@ -30,7 +31,10 @@ passport.use(
             done(null, newUser);
           });
         })
-        .catch(err => done(err));
+        .catch(err => {
+          console.log(err);
+          done(err);
+        });
     }
   )
 );

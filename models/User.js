@@ -13,13 +13,14 @@ const userSchema = new Schema(
       match: [/\S+@\S+\.\S+/, "is invalid"],
       index: true
     },
-    password: { type: String, required: true },
+    password: { type: String },
     image_Url: {
       type: String,
       default:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSYuIRmLMgwJRhONvJimSmKhV23zgXYSqy_7g_PZ3n1QyYF4iqw"
     },
     manager: Boolean,
+    linkedinId: String,
     role: String,
     projects: [
       {
