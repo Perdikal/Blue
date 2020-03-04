@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+/* import React, { Component } from "react";
 import axios from "axios";
 import NewTask from "../newTask/NewTask";
 
@@ -33,7 +33,7 @@ export default class Log extends Component {
     });
   };
 
-  /* handleSubmit = comment => {
+   handleSubmit = comment => {
     comment.preventDefault();
 
     axios.post("/project/:id/log"),
@@ -42,7 +42,7 @@ export default class Log extends Component {
         comment: this.state.comment,
         project: this.props.params.id
       };
-  }; */
+  }; 
 
   updateAddedComment = log => {
     this.state.log.push(log);
@@ -70,4 +70,5 @@ export default class Log extends Component {
     );
   }
 }
+ 
  */
