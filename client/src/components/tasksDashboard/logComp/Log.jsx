@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-import React, { Component } from "react";
+/* import React, { Component } from "react";
 import axios from "axios";
 import NewTask from "../newTask/NewTask";
 export default class Log extends Component {
@@ -50,17 +49,6 @@ export default class Log extends Component {
     this.setState({
       log: this.state.log
     });
-=======
-import React, { Component } from 'react';
-import axios from 'axios';
-import NewTask from '../newTask/NewTask';
-
-export default class Log extends Component {
-  state = {
-    author: '',
-    comment: '',
-    status: ''
->>>>>>> e15fb5f358a03a5ee58bc329aebc6d01abab9356
   };
 
   render() {
@@ -83,3 +71,4 @@ export default class Log extends Component {
     );
   }
 }
+ */
