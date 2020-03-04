@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
-import axios from 'axios';
+import React, { Component } from "react";
+import axios from "axios";
 
 export default class NewTask extends Component {
   state = {
-    title: '',
-    description: '',
-    status: '',
-    author: '',
-    assigneeText: '',
+    title: "",
+    description: "",
+    status: "",
+    author: "",
+    assigneeText: "",
     inputAssignees: [],
     users: [],
     filteredAssignees: [],
@@ -15,7 +15,7 @@ export default class NewTask extends Component {
   };
 
   componentDidMount() {
-    axios.get('/api/allMembers').then(response => {
+    axios.get("/api/allMembers").then(response => {
       this.setState({
         users: response.data
       });
@@ -26,7 +26,6 @@ export default class NewTask extends Component {
     event.preventDefault();
 
     let paramsId = this.props.params.id;
-    console.log('Markus', paramsId);
 
     axios
       .post(`/api/project/${paramsId}/createTask`, {
@@ -36,22 +35,16 @@ export default class NewTask extends Component {
         author: this.state.author
       })
       .then(response => {
-        console.log(response.data);
         this.props.updateAddedTasks(response.data);
       });
   };
 
   addAssignees = e => {
     e.preventDefault();
-    console.log(
-      'addCola',
-      this.state.inputAssignees,
-      this.state.assigneesToAdd
-    );
     this.setState({
       assigneesToAdd: [...this.state.assigneesToAdd, this.state.inputAssignees],
-      assigneeText: '',
-      inputAssignees: ''
+      assigneeText: "",
+      inputAssignees: ""
     });
   };
 
@@ -72,7 +65,6 @@ export default class NewTask extends Component {
   };
 
   render() {
-    console.log('HIUHIUHUI', this.props.params.id);
     return (
       <div>
         <form action="">

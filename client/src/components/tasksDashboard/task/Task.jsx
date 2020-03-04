@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import axios from 'axios';
-import NewTask from '../newTask/NewTask';
+import React, { Component } from "react";
+import axios from "axios";
+import NewTask from "../newTask/NewTask";
 
 export default class Task extends Component {
   state = {
@@ -12,7 +12,6 @@ export default class Task extends Component {
   }
 
   updateAddedTasks = task => {
-    console.log('show me the tasks');
     this.state.tasks.push(task);
     this.setState({
       tasks: this.state.tasks,
@@ -25,7 +24,7 @@ export default class Task extends Component {
       .get(`/project/${this.props.params.id}/tasks`)
       .then(response => {
         this.setState({
-          tasks: response.data
+          tasks: response.data //push?
         });
       })
       .catch(err => {
@@ -43,7 +42,7 @@ export default class Task extends Component {
     axios
       .post(`/project/${this.props.params.id}/createTask`)
       .then(response => {
-        console.log(response);
+        //console.log(response);
       })
       .catch(err => {
         console.error(err);
@@ -53,9 +52,22 @@ export default class Task extends Component {
   render() {
     return (
       <div>
-        {/* {this.state.tasks.length.map(task => {
-          return <span>{task.name}</span>;
-        })} */}
+        <div>
+          <h2>To dos:</h2>
+        </div>
+        <div>
+          <h2>Doing:</h2>
+        </div>
+        <div>
+          <h2>Done:</h2>
+        </div>
+        {this.state.tasks.map(task => {
+          return (
+            <div className="task-container">
+              <span>{task.name}</span>
+            </div>
+          );
+        })}
 
         <button onClick={this.showForm}>Create New Task</button>
         {this.state.showForm ? (
@@ -64,7 +76,7 @@ export default class Task extends Component {
             updateAddedTasks={this.updateAddedTasks}
           />
         ) : (
-          ''
+          ""
         )}
       </div>
     );
