@@ -1,6 +1,7 @@
-/* import React, { Component } from "react";
+import React, { Component } from "react";
 import axios from "axios";
 import NewTask from "../newTask/NewTask";
+
 export default class Log extends Component {
   state = {
     author: "",
@@ -32,19 +33,18 @@ export default class Log extends Component {
     });
   };
 
-  handleSubmit = comment => {
+  /* handleSubmit = comment => {
     comment.preventDefault();
 
     axios.post("/project/:id/log"),
       {
         author: this.state.author,
         comment: this.state.comment,
-        project: projectId
+        project: this.props.params.id
       };
-  };
+  }; */
 
   updateAddedComment = log => {
-    console.log("Doeeeeeeeeeeeees this even work");
     this.state.log.push(log);
     this.setState({
       log: this.state.log
@@ -52,7 +52,6 @@ export default class Log extends Component {
   };
 
   render() {
-    console.log(this.props);
     return (
       <div>
         <h4>Activity History:</h4>

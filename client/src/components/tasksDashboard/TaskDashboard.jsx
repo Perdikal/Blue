@@ -9,7 +9,6 @@ export default class TaskDashboard extends Component {
   };
 
   updateAddedTasks = task => {
-    console.log("Does this even work");
     this.state.tasks.push(task);
     this.setState({
       tasks: this.state.tasks,
@@ -18,14 +17,13 @@ export default class TaskDashboard extends Component {
   };
 
   render() {
-    console.log(this.props.match.params.id);
     return (
       <div>
-        <Log />
         <Task
           params={this.props.match.params}
           updateAddedTasks={this.updateAddedTasks}
         />
+        <Log />
       </div>
     );
   }
