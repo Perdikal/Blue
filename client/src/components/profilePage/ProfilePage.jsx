@@ -6,8 +6,11 @@ import NewProjectForm from "./NewProjectForm/NewProjectForm";
 
 export default class ProfilePage extends Component {
   render() {
+<<<<<<< HEAD
     console.log("USER", this.props.user);
     console.log("Project", this.props.user.projects);
+=======
+>>>>>>> e717c893371da78a3763ee9454eb9056c95df067
     return (
       <div>
         <UserInfo setUser={this.props.setUser} user={this.props.user} />

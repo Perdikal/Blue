@@ -103,10 +103,14 @@ export default class Signup extends Component {
           />
           <button type="submit">Create</button>
           {this.state.message && <p>{this.state.message}</p>}
+<<<<<<< HEAD
         </Form>
         <a href={process.env.REACT_APP_SERVER_URL + "/api/auth/linkedin"}>
           Login via Linkedin
         </a>
+=======
+        </form>
+>>>>>>> 59affa84c17ae85cbde76c679531201c9b6dbaa6
       </div>
     );
   }
