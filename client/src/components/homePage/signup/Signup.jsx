@@ -1,15 +1,15 @@
-import React, { Component } from 'react';
-import axios from 'axios';
-import { Label, Form } from './SignupStyle';
+import React, { Component } from "react";
+import axios from "axios";
+import { Label, Form } from "./SignupStyle";
 export default class Signup extends Component {
   state = {
-    firstName: '',
-    lastName: '',
-    role: '',
+    firstName: "",
+    lastName: "",
+    role: "",
     isManager: false,
-    email: '',
-    password: '',
-    message: ''
+    email: "",
+    password: "",
+    message: ""
   };
   handleChange = event => {
     this.setState({
@@ -27,7 +27,7 @@ export default class Signup extends Component {
     event.preventDefault();
 
     axios
-      .post('/api/auth/signup', {
+      .post("/api/auth/signup", {
         firstName: this.state.firstName,
         lastName: this.state.lastName,
         role: this.state.role,
@@ -36,9 +36,10 @@ export default class Signup extends Component {
         password: this.state.password
       })
       .then(response => {
-        console.log(response);
-        this.props.history.push('/profilepage');
-        //this.props.setUser(response.data);
+        console.log("here", response);
+        console.log("a", this.props.history);
+        this.props.history.push("/profilepage");
+        this.props.setUser(response.data);
       })
       .catch(err => {
         console.log(err.message);
@@ -103,7 +104,7 @@ export default class Signup extends Component {
           <button type="submit">Create</button>
           {this.state.message && <p>{this.state.message}</p>}
         </Form>
-        <a href={process.env.REACT_APP_SERVER_URL + '/api/auth/linkedin'}>
+        <a href={process.env.REACT_APP_SERVER_URL + "/api/auth/linkedin"}>
           Login via Linkedin
         </a>
       </div>

@@ -81,7 +81,6 @@ router.delete("/logout", (req, res) => {
 
 //  <<<<<<<<<<<<<<<<<  LOGGEDIN   >>>>>>>>>>>>>>>>>
 router.get("/loggedin", (req, res) => {
-  console.log("yo req, received");
   res.json(req.user);
 });
 
@@ -90,12 +89,10 @@ router.get("/linkedin", passport.authenticate("linkedin"));
 
 router.get(
   "/linkedin/callback",
-  passport.authenticate("linkedin", { failureRedirect: "/login" }),
-  function(req, res) {
-    // Successful authentication, redirect home.
-    res.render("/profilepage");
-    console.log("blabla");
-  }
+  passport.authenticate("linkedin", {
+    failureRedirect: "/login",
+    successRedirect: "http://localhost:3000/"
+  })
 );
 
 module.exports = router;
