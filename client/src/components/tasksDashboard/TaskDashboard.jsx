@@ -70,6 +70,7 @@ export default class TaskDashboard extends Component {
       <DragDropContext onDragEnd={this.onDragEnd}>
         <div>
           <Task
+           
             params={this.props.match.params}
             updateAddedTasks={this.updateAddedTasks}
           />
