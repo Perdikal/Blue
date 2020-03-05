@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import axios from 'axios';
-import NewTask from '../newTask/NewTask';
-import { Droppable } from 'react-beautiful-dnd';
-import { Draggable } from 'react-beautiful-dnd';
+import React, { Component } from "react";
+import axios from "axios";
+import NewTask from "../newTask/NewTask";
+import { Droppable } from "react-beautiful-dnd";
+import { Draggable } from "react-beautiful-dnd";
 
 export default class Task extends Component {
   state = {
@@ -48,83 +48,7 @@ export default class Task extends Component {
 
   render() {
     return (
-      <div className="tasks-container">
-        <Droppable droppableId="toDoId">
-          {provided => (
-            <div {...provided.droppableProps} ref={provided.innerRef}>
-              <h2>To dos:</h2>
-              {this.props.to_dos?.map((task, index) => {
-                return (
-                  <Draggable index={index} draggableId={String(task._id)}>
-                    {provided => (
-                      <div
-                        ref={provided.innerRef}
-                        {...provided.draggableProps}
-                        {...provided.dragHandleProps}
-                      >
-                        <div id="{task._id}">{task.title}</div>
-                      </div>
-                    )}
-                  </Draggable>
-                );
-              })}
-              {provided.placeholder}
-            </div>
-          )}
-        </Droppable>
-        <div>
-          <Droppable droppableId="doingId">
-            {provided => (
-              <div {...provided.droppableProps} ref={provided.innerRef}>
-                <h2>Doing:</h2>
-                {this.props.doings?.map((task, index) => {
-                  return (
-                    <Draggable index={index} draggableId={String(task._id)}>
-                      {provided => (
-                        <div
-                          ref={provided.innerRef}
-                          {...provided.draggableProps}
-                          {...provided.dragHandleProps}
-                        >
-                          <div id="{task._id}">{task.title}</div>
-                        </div>
-                      )}
-                    </Draggable>
-                  );
-                })}
-                {provided.placeholder}
-              </div>
-            )}
-          </Droppable>
-        </div>
-        <div>
-          <Droppable droppableId="doneId">
-            {provided => (
-              <div {...provided.droppableProps} ref={provided.innerRef}>
-                <h2>Done:</h2>
-                {this.props.dones?.map((task, index) => {
-                  return (
-                    <Draggable index={index} draggableId={String(task._id)}>
-                      {provided => (
-                        <div
-                          ref={provided.innerRef}
-                          {...provided.draggableProps}
-                          {...provided.dragHandleProps}
-                        >
-                          <div id="{task._id}">{task.title}</div>
-                        </div>
-                      )}
-                    </Draggable>
-                  );
-                })}
-                {provided.placeholder}
-              </div>
-            )}
-          </Droppable>
-        </div>
-        {/* {this.state.tasks.length.map(task => {
-          return <span>{task.name}</span>;
-        })} */}
+      <div>
         <button onClick={this.showForm}>Create New Task</button>
         {this.state.showForm ? (
           <NewTask
@@ -132,8 +56,101 @@ export default class Task extends Component {
             updateAddedTasks={this.updateAddedTasks}
           />
         ) : (
-          ''
+          ""
         )}
+        <div className="tasks-container">
+          <Droppable droppableId="toDoId">
+            {provided => (
+              <div
+                className="droppable"
+                id="todo"
+                {...provided.droppableProps}
+                ref={provided.innerRef}
+              >
+                <h2>To dos:</h2>
+                {this.props.to_dos?.map((task, index) => {
+                  return (
+                    <Draggable index={index} draggableId={String(task._id)}>
+                      {provided => (
+                        <div
+                          ref={provided.innerRef}
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
+                        >
+                          <div id="{task._id}">{task.title}</div>
+                        </div>
+                      )}
+                    </Draggable>
+                  );
+                })}
+                {provided.placeholder}
+              </div>
+            )}
+          </Droppable>
+          <div>
+            <Droppable droppableId="doingId">
+              {provided => (
+                <div
+                  className="droppable"
+                  id="doing"
+                  {...provided.droppableProps}
+                  ref={provided.innerRef}
+                >
+                  <h2>Doing:</h2>
+                  {this.props.doings?.map((task, index) => {
+                    return (
+                      <Draggable index={index} draggableId={String(task._id)}>
+                        {provided => (
+                          <div
+                            ref={provided.innerRef}
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                          >
+                            <div id="{task._id}">{task.title}</div>
+                          </div>
+                        )}
+                      </Draggable>
+                    );
+                  })}
+                  {provided.placeholder}
+                </div>
+              )}
+            </Droppable>
+          </div>
+          <div>
+            <Droppable droppableId="doneId">
+              {provided => (
+                <div
+                  className="droppable"
+                  id="done"
+                  {...provided.droppableProps}
+                  ref={provided.innerRef}
+                >
+                  <h2>Done:</h2>
+                  {this.props.dones?.map((task, index) => {
+                    return (
+                      <Draggable index={index} draggableId={String(task._id)}>
+                        {provided => (
+                          <div
+                            ref={provided.innerRef}
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                          >
+                            <div id="{task._id}">{task.title}</div>
+                          </div>
+                        )}
+                      </Draggable>
+                    );
+                  })}
+                  {provided.placeholder}
+                </div>
+              )}
+            </Droppable>
+          </div>
+          {/* {this.state.tasks.length.map(task => {
+          return <span>{task.name}</span>;
+        })} */}
+        </div>
       </div>
     );
   }

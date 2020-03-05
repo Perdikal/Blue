@@ -9,12 +9,20 @@ export default class TaskDashboard extends Component {
     to_do: [],
     doing: [],
     done: [],
-    showForm: false
+    showForm: false,
+    projectName: ""
   };
 
   componentDidMount() {
     this.getTaskData();
+    this.getName();
   }
+  getName = () => {
+    const id = this.props.match.params.id;
+    axios.get(`/api/projecta/${id}`).then(response => {
+      this.setState({ projectName: response.data.name });
+    });
+  };
   deleteProject = () => {
     const id = this.props.match.params.id;
     axios
@@ -173,16 +181,19 @@ export default class TaskDashboard extends Component {
 
     return (
       <div>
+        <h2 className="title">{this.state.projectName}</h2>
         <DragDropContext onDragEnd={this.onDragEnd}>
           <div>
-            <Task
-              to_dos={this.state.to_do}
-              doings={this.state.doing}
-              dones={this.state.done}
-              params={this.props.match.params}
-              updateAddedTasks={this.updateAddedTasks}
-            />
-            <Log params={this.props.match.params} user={this.props.user} />
+            <div className="general-papa">
+              <Task
+                to_dos={this.state.to_do}
+                doings={this.state.doing}
+                dones={this.state.done}
+                params={this.props.match.params}
+                updateAddedTasks={this.updateAddedTasks}
+              />
+              <Log params={this.props.match.params} user={this.props.user} />
+            </div>
           </div>
         </DragDropContext>
         <div>
