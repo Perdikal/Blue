@@ -151,6 +151,23 @@ router.post("/project/:id/log", loginCheck, (req, res) => {
       console.error(err);
     });
 });
+router.post("/project/:id/delete", loginCheck, (req, res, next) => {
+  const projectId = req.params.id;
+  Project.findByIdAndRemove(projectId)
+    .then(project => {
+      console.log("Project DELETEEEED");
+      User.findByIdAndUpdate(
+        req.user._id,
+        { $pull: { projects: project._id } },
+        { new: true }
+      ).then(() => {
+        res.json();
+      });
+    })
+    .catch(err => {
+      next(err);
+    });
+});
 
 router.get("/project/:id", loginCheck, (req, res) => {
   const userId = req.user._id;

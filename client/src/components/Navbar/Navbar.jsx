@@ -12,15 +12,24 @@ export default class Navbar extends Component {
     });
   };
 
+  goToProfile = () => {
+    this.props.history.push("/profilepage");
+  };
+
   render() {
     console.log("Button");
     return (
       <div>
-        {this.props.user ? (
-          <button onClick={this.handleLogout}>Logout</button>
-        ) : (
-          <Login history={this.props.history} setUser={this.props.setUser} />
-        )}
+        <div>
+          {this.props.user ? (
+            <>
+              <button onClick={this.handleLogout}>Logout</button>
+              <button onClick={this.goToProfile}>Profile</button>
+            </>
+          ) : (
+            <Login history={this.props.history} setUser={this.props.setUser} />
+          )}
+        </div>
       </div>
     );
   }
