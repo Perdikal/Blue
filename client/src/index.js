@@ -3,10 +3,10 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App.jsx';
 import * as serviceWorker from './serviceWorker';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Switch } from 'react-router-dom';
 import axios from 'axios';
 
-axios.get('api/auth/loggedin').then(response => {
+axios.get('/api/auth/loggedin').then(response => {
   ReactDOM.render(
     <BrowserRouter>
       <App user={response.data} />

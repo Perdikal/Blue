@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react';
 
 const Footer = () => {
-  return <div>Powerd by: Alexis, Ciwan & Lluís</div>;
+  return <div>Created by: Alexis, Ciwan & Lluís</div>;
 };
 
 export default Footer;

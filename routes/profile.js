@@ -34,31 +34,4 @@ router.post("/profile/edit", (req, res) => {
   });
 });
 
-router.get("/project", (req, res) => {
-  const userId = req.user._id;
-  User.findById(userId)
-    .populate("projects")
-    .then(user => {
-      res.json(user);
-    })
-    .catch(err => {
-      res.status(500).json({
-        message: err.message
-      });
-    });
-});
-
-router.post("/project", (req, res) => {
-  const { name, members } = req.body;
-  Project.create({
-    name: name,
-    author: req.user._id,
-    members: [...members, req.user._id]
-  }).then(project => {
-    project.members.forEach(member => {
-      User.findByIdAndUpdate(member, { $push: { projects: project._id } });
-    });
-  });
-});
-
 module.exports = router;

@@ -7,8 +7,7 @@ const User = require("../models/User");
 //>>>>>>>>>>>>>>>>>>>>>   SIGNUP   <<<<<<<<<<<<<<<<<<<<<<
 
 router.post("/signup", (req, res) => {
-  console.log("it works", req.body);
-  const { firstName, lastName, email, password } = req.body;
+  const { firstName, lastName, email, password, role } = req.body;
 
   if (!email) {
     return res.status(400).json({ message: "email can't be empty" });
@@ -31,6 +30,7 @@ router.post("/signup", (req, res) => {
           return User.create({
             firstName: firstName,
             lastName: lastName,
+            role: role,
             email: email,
             password: hash
           });
@@ -41,7 +41,6 @@ router.post("/signup", (req, res) => {
               res.status(500).json({ message: "Error while logging in" });
             else res.json(newUser);
           });
-          console.log("it works", newUser);
         });
     })
     .catch(err => {
@@ -64,7 +63,6 @@ router.post("/login", (req, res, next) => {
       if (err) {
         return res.status(500).json({ message: "Error while logging in" });
       }
-      console.log("user", req.user);
       res.json(user);
     });
   })(req, res, next);
@@ -79,8 +77,18 @@ router.delete("/logout", (req, res) => {
 
 //  <<<<<<<<<<<<<<<<<  LOGGEDIN   >>>>>>>>>>>>>>>>>
 router.get("/loggedin", (req, res) => {
-  console.log("yo req, received");
   res.json(req.user);
 });
+
+// <<<<<<<<<<<<<<<<<<<< Linkedin Login >>>>>>>>>>>>>>>>>>>>>
+router.get("/linkedin", passport.authenticate("linkedin"));
+
+router.get(
+  "/linkedin/callback",
+  passport.authenticate("linkedin", {
+    failureRedirect: "/login",
+    successRedirect: "http://localhost:3000/"
+  })
+);
 
 module.exports = router;
