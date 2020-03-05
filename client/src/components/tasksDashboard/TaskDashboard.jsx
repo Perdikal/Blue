@@ -131,14 +131,46 @@ export default class TaskDashboard extends Component {
   changeStatus = () => {};
 
   updateAddedTasks = task => {
-    console.log(task);
     this.setState({
       to_do: [...this.state.to_do, task],
       showForm: false
     });
   };
+  // this.state.tasks.push(task);
 
+  deleteProject = () => {
+    console.log("whateverdeleteteeeeee", this.props.user.projects);
+    const id = this.props.match.params.id;
+
+    axios
+      .post(`/api/project/${id}/delete`)
+      .then(response => {
+        console.log(response);
+        console.log(this.props.history);
+        this.props.history.push("/profilepage");
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  };
+
+  editProject = () => {
+    const id = this.props.match.params.id;
+
+    axios
+      .post(`/api/project/${id}/edit`)
+      .then(response => {
+        console.log(response);
+        console.log(this.props.history);
+        this.props.history.push("/profilepage");
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  };
   render() {
+    console.log(this.props.match.params.id);
+
     return (
       <div>
         <DragDropContext onDragEnd={this.onDragEnd}>

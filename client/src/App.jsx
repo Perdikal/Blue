@@ -7,11 +7,6 @@ import HomePage from "./components/homePage/HomePage";
 import ProfilePage from "./components/profilePage/ProfilePage";
 import TaskDashboard from "./components/tasksDashboard/TaskDashboard";
 
-import Signup from "./components/homePage/signup/Signup";
-import Steps from "./components/homePage/steps/Steps";
-import Info from "./components/homePage/info/Info";
-import Project from "./components/profilePage/project/Project";
-
 class App extends React.Component {
   state = {
     user: this.props.user
@@ -26,7 +21,7 @@ class App extends React.Component {
 
   deleteUserState() {
     this.setState({
-      user: ""
+      user: ''
     });
   }
   render() {
@@ -35,6 +30,7 @@ class App extends React.Component {
         <Route
           render={props => (
             <Navbar
+              color={"#192c7e"}
               history={props.history}
               //{...props}
               setUser={this.setUser}
@@ -43,19 +39,7 @@ class App extends React.Component {
             />
           )}
         />
-        {/*  { <Route
-          exact
-          path="/"
-          render={props => (
-            <Signup
-              history={props.history}
-              //{...props}
-              setUser={this.setUser}
-              user={this.state.user}
-            />
-          )}
-        /> } */}
-        <h2>Blue</h2>
+
         {this.state.user ? (
           <Route
             exact

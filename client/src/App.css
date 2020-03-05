@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  height: 900px;
 }
 
 .App-logo {
@@ -35,4 +36,100 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.login-form {
+  display: flex;
+}
+.roterdam {
+  display: flex;
+  flex-direction: column;
+}
+.signup-form {
+  border: 1px solid whitesmoke;
+  width: 300px;
+  padding-bottom: 30px;
+  text-align: center;
+}
+.blue2 {
+  display: flex;
+  justify-content: space-between;
+  background-image: url("https://www.elegantthemes.com/blog/wp-content/uploads/2019/10/000-Project-Management-Plugins.png");
+  height: 500px;
+}
+
+h1 {
+  padding-left: 40px;
+}
+.stepsh3 {
+  display: flex;
+  justify-content: center;
+}
+
+.steps {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-bottom: 50px;
+}
+.small-steps {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  width: 20%;
+  height: 30%;
+}
+
+.parag {
+  text-align: justify;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.allsteps {
+  position: absolute;
+}
+/*
+.footer {
+  background-color: #192c7e;
+  color: #fff;
+
+  flex-shrink: 0;
+} */
+
+.information-container {
+  display: flex;
+}
+
+.text-info {
+  justify-content: space-evenly;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.projectBox {
+  border: 1px solid gray;
+  border-radius: 5px;
+  box-shadow: 5px 8px lightgrey;
+  width: 20vw;
+  height: 10vh;
+  margin: 3vh;
+  background-image: url("https://c.stocksy.com/a/04Q300/z9/815176.jpg?1575375781");
+  image-rendering: auto;
+  color: #ffff;
+  list-style-type: none;
+}
+h3 {
+  display: flex;
+  padding-left: 20px;
+}
+
+.containerProjects {
+  display: flex;
+  flex-direction: row;
 }

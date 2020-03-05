@@ -1,8 +1,8 @@
-import React, { Component, Route } from "react";
-import Info from "./info/Info";
-import Signup from "./signup/Signup";
-import Steps from "./steps/Steps";
-import Navbar from "../Navbar/Navbar";
+import React, { Component, Route } from 'react';
+import Info from './info/Info';
+import Signup from './signup/Signup';
+import Steps from './steps/Steps';
+import Navbar from '../Navbar/Navbar';
 
 export default class HomePage extends Component {
   state = {
@@ -17,8 +17,13 @@ export default class HomePage extends Component {
   render() {
     return (
       <div>
+        <div className="blue2">
+          <h1>Blue</h1>
+          <Signup></Signup>
+        </div>
+
         <Info />
-        <Signup />
+
         <Steps />
       </div>
     );
