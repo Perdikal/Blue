@@ -19,7 +19,7 @@ export default class HomePage extends Component {
       <div>
         <div className="blue2">
           <h1>Blue</h1>
-          <Signup></Signup>
+          <Signup setUser={this.props.setUser} history={this.props.history} />
         </div>
 
         <Info />
