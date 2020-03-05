@@ -36,3 +36,19 @@
     transform: rotate(360deg);
   }
 }
+
+.login-form {
+  display: flex;
+  position: relative;
+  left: 700px;
+}
+
+.signup-form {
+  border: 1px solid whitesmoke;
+  width: 300px;
+  height: 300px;
+  position: absolute;
+  align-content: center;
+  justify-content: right;
+  left: 950px;
+}

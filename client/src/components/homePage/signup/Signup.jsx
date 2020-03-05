@@ -52,7 +52,8 @@ export default class Signup extends Component {
   render() {
     return (
       <div>
-        <Form onSubmit={this.handleSubmit}>
+        <Form className="signup-form" onSubmit={this.handleSubmit}>
+          <h3>Signup</h3>
           <Label htmlFor="firstName">First Name: </Label>
           <input
             type="text"
@@ -61,6 +62,7 @@ export default class Signup extends Component {
             value={this.state.firstName}
             onChange={this.handleChange}
           />
+          <br></br>
           <Label htmlFor="lasttName">Last Name: </Label>
           <input
             type="text"
@@ -69,6 +71,7 @@ export default class Signup extends Component {
             value={this.state.lastName}
             onChange={this.handleChange}
           />
+          <br></br>
           <Label htmlFor="role">Role: </Label>
           <input
             type="text"
@@ -77,6 +80,7 @@ export default class Signup extends Component {
             value={this.state.role}
             onChange={this.handleChange}
           />
+          <br></br>
           <Label htmlFor="isManager">Are you a Manager?</Label>
           <input
             type="checkbox"
@@ -85,6 +89,7 @@ export default class Signup extends Component {
             checked={this.state.isManager}
             onChange={this.handleCheck}
           />
+          <br></br>
           <Label htmlFor="email">Email: </Label>
           <input
             type="email"
@@ -93,6 +98,7 @@ export default class Signup extends Component {
             value={this.state.email}
             onChange={this.handleChange}
           />
+          <br></br>
           <Label htmlFor="password">Password: </Label>
           <input
             type="password"
@@ -101,12 +107,14 @@ export default class Signup extends Component {
             value={this.state.password}
             onChange={this.handleChange}
           />
+          <br></br>
           <button type="submit">Create</button>
           {this.state.message && <p>{this.state.message}</p>}
+          <br></br>
+          <a href={process.env.REACT_APP_SERVER_URL + "/api/auth/linkedin"}>
+            Login via Linkedin
+          </a>
         </Form>
-        <a href={process.env.REACT_APP_SERVER_URL + "/api/auth/linkedin"}>
-          Login via Linkedin
-        </a>
       </div>
     );
   }

@@ -1,7 +1,8 @@
-import React from 'react';
+import React from "react";
+import Footerstyle from "./FooterStyle";
 
 const Footer = () => {
-  return <div>Created by: Alexis, Ciwan & Lluís</div>;
+  return <Footerstyle>Created by: Alexis, Ciwan & Lluís</Footerstyle>;
 };
 
 export default Footer;

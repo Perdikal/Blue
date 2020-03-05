@@ -50,7 +50,9 @@ router.post("/project/createProject", loginCheck, (req, res) => {
       project.members.forEach(member => {
         User.findByIdAndUpdate(member, {
           $push: { projects: project._id }
-        }).then(updated => {});
+        }).then(updated => {
+          console.log("user has been updated!", updated);
+        });
       });
 
       res.json(project);
@@ -81,10 +83,8 @@ router.get("/project/bringmine", loginCheck, (req, res) => {
 
 router.post("/project/:id/createtask", loginCheck, (req, res) => {
   const projectId = req.params.id;
-  console.log("req.body??", req.body);
-  console.log(req.params);
-  const { title, description, assignee, status, id } = req.body;
-  /*   console.log(assignee);
+  const { title, description, assignee, status } = req.body;
+  console.log(assignee);
   User.findOne({ firstName: assignee.split(" ")[0] }).then(result => {
     Task.create({
       project: projectId,
@@ -102,19 +102,6 @@ router.post("/project/:id/createtask", loginCheck, (req, res) => {
       .catch(err => {
         console.error(err);
       });
-*/
-  Task.create({
-    title: title,
-    description: description,
-    assignee: assignee,
-    status: status,
-    author: id
-  }).then(task => {
-    Project.findByIdAndUpdate(projectId, { $push: { tasks: task._id } }).then(
-      () => {
-        res.json({ message: "Alles good" });
-      }
-    );
   });
 });
 
@@ -182,6 +169,23 @@ projects.push(Project)
       res.status(500).json({
         message: err.message
       });
+    });
+});
+
+router.post("/project/:id/delete", loginCheck, (req, res, next) => {
+  const projectId = req.params.id;
+
+  Project.findByIdAndRemove(projectId)
+    .then(project => {
+      console.log("Project DELETEEEED");
+      User.findByIdAndUpdate(
+        req.user._id,
+        { $pull: { projects: project._id } },
+        { new: true }
+      );
+    })
+    .catch(err => {
+      next(err);
     });
 });
 
