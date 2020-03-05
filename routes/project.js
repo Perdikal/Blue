@@ -82,7 +82,7 @@ router.get("/project/bringmine", loginCheck, (req, res) => {
 router.post("/project/:id/createtask", loginCheck, (req, res) => {
   const projectId = req.params.id;
   const { title, description, assignee, status } = req.body;
-  /*   console.log(assignee);
+  console.log(assignee);
   User.findOne({ firstName: assignee.split(" ")[0] }).then(result => {
     Task.create({
       project: projectId,
@@ -100,19 +100,6 @@ router.post("/project/:id/createtask", loginCheck, (req, res) => {
       .catch(err => {
         console.error(err);
       });
-*/
-  Task.create({
-    title: title,
-    description: description,
-    assignee: assignee,
-    status: status,
-    author: id
-  }).then(task => {
-    Project.findByIdAndUpdate(projectId, { $push: { tasks: task._id } }).then(
-      () => {
-        res.json({ message: "Alles good" });
-      }
-    );
   });
 });
 
