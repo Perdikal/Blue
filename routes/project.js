@@ -29,8 +29,8 @@ router.post('/project/createProject', loginCheck, (req, res) => {
 
   Promise.all(
     members.map(member => {
-      let firstName = member.split(" ")[0];
-      let lastName = member.split(" ")[1];
+      let firstName = member.split(' ')[0];
+      let lastName = member.split(' ')[1];
       return new Promise(function(res, req) {
         let userFind = User.find({ firstName: firstName, lastName: lastName });
         res(userFind);
@@ -81,11 +81,11 @@ router.get('/project/bringmine', loginCheck, (req, res) => {
     });
 });
 
-router.post("/project/:id/createtask", loginCheck, (req, res) => {
+router.post('/project/:id/createtask', loginCheck, (req, res) => {
   const projectId = req.params.id;
   const { title, description, assignee, status } = req.body;
   console.log(assignee);
-  User.findOne({ firstName: assignee.split(" ")[0] }).then(result => {
+  User.findOne({ firstName: assignee.split(' ')[0] }).then(result => {
     Task.create({
       project: projectId,
       title: title,
@@ -105,7 +105,7 @@ router.post("/project/:id/createtask", loginCheck, (req, res) => {
   });
 });
 
-router.get("/project/:id/tasks", loginCheck, (req, res) => {
+router.get('/project/:id/tasks', loginCheck, (req, res) => {
   const projectId = req.params.id;
   Task.find({ project: projectId }).then(taskList => {
     res.json(taskList);
@@ -182,7 +182,9 @@ router.post('/project/:id/delete', loginCheck, (req, res, next) => {
         req.user._id,
         { $pull: { projects: project._id } },
         { new: true }
-      );
+      ).then(() => {
+        res.json();
+      });
     })
     .catch(err => {
       next(err);

@@ -7,7 +7,8 @@ import axios from 'axios';
 export default class TaskDashboard extends Component {
   state = {
     tasks: [],
-    showForm: false
+    showForm: false,
+    editForm: false
   };
 
   onDragEnd = result => {
@@ -61,6 +62,21 @@ export default class TaskDashboard extends Component {
         console.error(err);
       });
   };
+
+  editProject = () => {
+    const id = this.props.match.params.id;
+
+    axios
+      .post(`/api/project/${id}/edit`)
+      .then(response => {
+        console.log(response);
+        console.log(this.props.history);
+        this.props.history.push('/profilepage');
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  };
   render() {
     console.log(this.props.match.params.id);
 
@@ -79,7 +95,7 @@ export default class TaskDashboard extends Component {
           {' '}
           <button onClick={this.deleteProject}>Delete this project</button>
         </div>{' '}
-      </div>
+        </div>
     );
   }
 }
