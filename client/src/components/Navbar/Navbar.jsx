@@ -14,14 +14,19 @@ export default class Navbar extends Component {
   };
 
   render() {
-    console.log("Button");
     return (
       <Nav color={"#192c7e"}>
-        {this.props.user ? (
-          <button onClick={this.handleLogout}>Logout</button>
-        ) : (
-          <Login history={this.props.history} setUser={this.props.setUser} />
-        )}
+        <div>
+          {this.props.user ? (
+            <>
+              <button onClick={this.handleLogout}>Logout</button>
+              <Link to="/profilepage">Profile</Link>
+            </>
+          ) : (
+            <Login history={this.props.history} setUser={this.props.setUser} />
+          )}
+        </div>
+        <div></div>
       </Nav>
     );
   }

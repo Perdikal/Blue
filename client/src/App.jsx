@@ -6,10 +6,6 @@ import Footer from "./components/footer/Footer";
 import HomePage from "./components/homePage/HomePage";
 import ProfilePage from "./components/profilePage/ProfilePage";
 import TaskDashboard from "./components/tasksDashboard/TaskDashboard";
-
-import Signup from "./components/homePage/signup/Signup";
-import Steps from "./components/homePage/steps/Steps";
-import Info from "./components/homePage/info/Info";
 import Project from "./components/profilePage/project/Project";
 
 class App extends React.Component {
@@ -44,7 +40,7 @@ class App extends React.Component {
             />
           )}
         />
-        <Route
+        {/* <Route
           exact
           path="/"
           render={props => (
@@ -55,9 +51,15 @@ class App extends React.Component {
               user={this.state.user}
             />
           )}
-        />
-        <h2>Blue</h2>
-        <Route exact path="/" component={HomePage} />
+        /> */}
+        <div className="blue">
+          <h1>Blue</h1>
+        </div>
+        {this.state.user ? (
+          <Route exact path="/" component={ProfilePage} />
+        ) : (
+          <Route exact path="/" component={HomePage} />
+        )}
         <Route
           exact
           path="/profilepage"
