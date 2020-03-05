@@ -1,13 +1,13 @@
-import React, { Component } from "react";
-import axios from "axios";
+import React, { Component } from 'react';
+import axios from 'axios';
 
 export default class NewTask extends Component {
   state = {
-    title: "",
-    description: "",
-    status: "",
-    author: "",
-    assigneeText: "",
+    title: '',
+    description: '',
+    status: '',
+    author: '',
+    assigneeText: '',
     inputAssignees: [],
     users: [],
     filteredAssignees: [],
@@ -15,7 +15,7 @@ export default class NewTask extends Component {
   };
 
   componentDidMount() {
-    axios.get("/api/allMembers").then(response => {
+    axios.get('/api/allMembers').then(response => {
       this.setState({
         users: response.data
       });
@@ -35,6 +35,7 @@ export default class NewTask extends Component {
         author: this.state.author
       })
       .then(response => {
+        console.log(response.data);
         this.props.updateAddedTasks(response.data);
       });
   };
@@ -43,8 +44,8 @@ export default class NewTask extends Component {
     e.preventDefault();
     this.setState({
       assigneesToAdd: [...this.state.assigneesToAdd, this.state.inputAssignees],
-      assigneeText: "",
-      inputAssignees: ""
+      assigneeText: '',
+      inputAssignees: ''
     });
   };
 

@@ -1,12 +1,13 @@
-import React, { Component } from "react";
-import axios from "axios";
-import NewTask from "../newTask/NewTask";
-import { Droppable } from "react-beautiful-dnd";
-import { Draggable } from "react-beautiful-dnd";
+import React, { Component } from 'react';
+import axios from 'axios';
+import NewTask from '../newTask/NewTask';
+import { Droppable } from 'react-beautiful-dnd';
+import { Draggable } from 'react-beautiful-dnd';
 
 export default class Task extends Component {
   state = {
-    showForm: false
+    showForm: false,
+    tasks: []
   };
   /* componentDidMount() {
     this.getTaskData();
@@ -19,13 +20,14 @@ export default class Task extends Component {
   //   }
   // }
 
-  // updateAddedTasks = task => {
-  //   this.state.tasks.push(task);
-  //   this.setState({
-  //     tasks: [...this.state.tasks, task],
-  //     showForm: false
-  //   });
-  // };
+  updateAddedTasks = task => {
+    this.props.updateAddedTasks(task);
+
+    this.setState({
+      tasks: [...this.state.tasks, task],
+      showForm: false
+    });
+  };
 
   showForm = () => {
     this.setState({
@@ -130,7 +132,7 @@ export default class Task extends Component {
             updateAddedTasks={this.updateAddedTasks}
           />
         ) : (
-          ""
+          ''
         )}
       </div>
     );
