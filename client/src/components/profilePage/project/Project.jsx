@@ -61,6 +61,8 @@ export default class Project extends Component {
   };
 
   render() {
+    console.log("Projectsssssssss", this.props.user.projects);
+    console.log("tetetet", this.project);
     return (
       <div>
         {this.state.showAll ? (
