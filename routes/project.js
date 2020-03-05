@@ -81,7 +81,9 @@ router.get("/project/bringmine", loginCheck, (req, res) => {
 
 router.post("/project/:id/createtask", loginCheck, (req, res) => {
   const projectId = req.params.id;
-  const { title, description, assignee, status } = req.body;
+  console.log("req.body??", req.body);
+  console.log(req.params);
+  const { title, description, assignee, status, id } = req.body;
   /*   console.log(assignee);
   User.findOne({ firstName: assignee.split(" ")[0] }).then(result => {
     Task.create({

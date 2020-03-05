@@ -21,7 +21,9 @@ export default class Log extends Component {
   };
 
   getAllData = () => {
+    console.log("TUUUUUUUU", this.props.params);
     const id = this.props.params.id;
+
     axios.get(`/api/project/${id}/log`).then(response => {
       this.setState({
         author: "",

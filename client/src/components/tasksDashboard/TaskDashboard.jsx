@@ -1,14 +1,8 @@
-<<<<<<< HEAD
 import { DragDropContext } from "react-beautiful-dnd";
 import React, { Component } from "react";
 import Task from "./task/Task";
 import Log from "./logComp/Log";
 import axios from "axios";
-=======
-import React, { Component } from "react";
-import Task from "./task/Task";
-import Log from "./logComp/Log";
->>>>>>> 59affa84c17ae85cbde76c679531201c9b6dbaa6
 
 export default class TaskDashboard extends Component {
   state = {
@@ -45,10 +39,6 @@ export default class TaskDashboard extends Component {
   changeStatus = () => {};
 
   updateAddedTasks = task => {
-<<<<<<< HEAD
-=======
-    this.state.tasks.push(task);
->>>>>>> 59affa84c17ae85cbde76c679531201c9b6dbaa6
     this.setState({
       tasks: this.state.tasks,
       showForm: false
@@ -56,26 +46,18 @@ export default class TaskDashboard extends Component {
   };
 
   render() {
+    console.log("SUUUUUUP", this.props.user);
+    console.log("params?", this.props.match);
     return (
-<<<<<<< HEAD
       <DragDropContext onDragEnd={this.onDragEnd}>
         <div>
           <Task
             params={this.props.match.params}
             updateAddedTasks={this.updateAddedTasks}
           />
-          <Log />
+          <Log user={this.props.user} params={this.props.match.params} />
         </div>
       </DragDropContext>
-=======
-      <div>
-        <Log params={this.props.match.params} />
-        <Task
-          params={this.props.match.params}
-          updateAddedTasks={this.updateAddedTasks}
-        />
-      </div>
->>>>>>> 59affa84c17ae85cbde76c679531201c9b6dbaa6
     );
   }
 }
