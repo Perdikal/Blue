@@ -21,7 +21,7 @@ export default class Log extends Component {
   };
 
   getAllData = () => {
-    const id = this.props.params.id;
+    const id = this.props.params?.id;
     axios.get(`/api/project/${id}/log`).then(response => {
       this.setState({
         author: "",
@@ -35,7 +35,7 @@ export default class Log extends Component {
   handleSubmit = event => {
     event.preventDefault();
 
-    const id = this.props.params.id;
+    const id = this.props.params?.id;
     axios
       .post(`/api/project/${id}/log`, {
         author: this.state.author,

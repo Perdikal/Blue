@@ -1,7 +1,7 @@
+import { DragDropContext } from 'react-beautiful-dnd';
 import React, { Component } from 'react';
 import Task from './task/Task';
 import Log from './logComp/Log';
-import { DragDropContext } from 'react-beautiful-dnd';
 import axios from 'axios';
 
 export default class TaskDashboard extends Component {
@@ -39,14 +39,12 @@ export default class TaskDashboard extends Component {
   changeStatus = () => {};
 
   updateAddedTasks = task => {
-    console.log('Does this even work');
-
-    this.state.tasks.push(task);
     this.setState({
       tasks: this.state.tasks,
       showForm: false
     });
   };
+  // this.state.tasks.push(task);
 
   deleteProject = () => {
     console.log('whateverdeleteteeeeee', this.props.user.projects);
@@ -67,21 +65,21 @@ export default class TaskDashboard extends Component {
     console.log(this.props.match.params.id);
 
     return (
-      <DragDropContext onDragEnd={this.onDragEnd}>
+      <div>
+        <DragDropContext onDragEnd={this.onDragEnd}>
+          <div>
+            <Task
+              params={this.props.match.params}
+              updateAddedTasks={this.updateAddedTasks}
+            />
+            <Log params={this.props.match.params} user={this.props.user} />
+          </div>
+        </DragDropContext>
         <div>
-          <Task
-           
-            params={this.props.match.params}
-            updateAddedTasks={this.updateAddedTasks}
-          />
-          <Log />
-        </div>
-      </DragDropContext>
+          {' '}
+          <button onClick={this.deleteProject}>Delete this project</button>
+        </div>{' '}
+      </div>
     );
   }
 }
-
-{/* <div>
-{' '}
-<button onClick={this.deleteProject}>Delete this project</button>
-</div> */}
