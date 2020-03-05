@@ -126,10 +126,52 @@ export default class TaskDashboard extends Component {
       showForm: false
     });
   };
+  // this.state.tasks.push(task);
 
+  deleteProject = () => {
+    console.log("whateverdeleteteeeeee", this.props.user.projects);
+    const id = this.props.match.params.id;
+
+    axios
+      .post(`/api/project/${id}/delete`)
+      .then(response => {
+        console.log(response);
+        console.log(this.props.history);
+        this.props.history.push("/profilepage");
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  };
+
+  editProject = () => {
+    const id = this.props.match.params.id;
+
+    axios
+      .post(`/api/project/${id}/edit`)
+      .then(response => {
+        console.log(response);
+        console.log(this.props.history);
+        this.props.history.push("/profilepage");
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  };
   render() {
+    console.log(this.props.match.params.id);
+
     return (
-      <DragDropContext onDragEnd={this.onDragEnd}>
+      <div>
+        <DragDropContext onDragEnd={this.onDragEnd}>
+          <div>
+            <Task
+              params={this.props.match.params}
+              updateAddedTasks={this.updateAddedTasks}
+            />
+            <Log params={this.props.match.params} user={this.props.user} />
+          </div>
+        </DragDropContext>
         <div>
           <Task
             to_dos={this.state.to_do}
@@ -138,9 +180,10 @@ export default class TaskDashboard extends Component {
             params={this.props.match.params}
             updateAddedTasks={this.updateAddedTasks}
           />
-          <Log params={this.props.match.params} user={this.props.user} />
-        </div>
-      </DragDropContext>
+          <Log params={this.props.match.params} user={this.props.user} />{" "}
+          <button onClick={this.deleteProject}>Delete this project</button>
+        </div>{" "}
+      </div>
     );
   }
 }
