@@ -52,9 +52,7 @@ class App extends React.Component {
             />
           )}
         /> */}
-        <div className="blue">
-          <h1>Blue</h1>
-        </div>
+
         {this.state.user ? (
           <Route exact path="/" component={ProfilePage} />
         ) : (

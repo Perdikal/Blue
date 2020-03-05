@@ -16,6 +16,7 @@ export default class Navbar extends Component {
   render() {
     return (
       <Nav color={"#192c7e"}>
+        <div></div>
         <div>
           {this.props.user ? (
             <>
@@ -26,7 +27,6 @@ export default class Navbar extends Component {
             <Login history={this.props.history} setUser={this.props.setUser} />
           )}
         </div>
-        <div></div>
       </Nav>
     );
   }
