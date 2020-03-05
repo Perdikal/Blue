@@ -17,7 +17,7 @@ export default class HomePage extends Component {
   render() {
     return (
       <div>
-        <Signup></Signup>
+        <Signup />
         <Info />
         <Steps />
       </div>

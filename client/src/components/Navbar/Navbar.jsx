@@ -11,6 +11,9 @@ export default class Navbar extends Component {
       this.props.history.push('/');
     });
   };
+  goToProfile = () => {
+    this.props.history.push('/profilepage');
+  };
 
   render() {
     return (
@@ -19,13 +22,12 @@ export default class Navbar extends Component {
           {this.props.user ? (
             <>
               <button onClick={this.handleLogout}>Logout</button>
-              <Link to="/profilepage">Profile</Link>
+              <button onClick={this.goToProfile}>Profile</button>
             </>
           ) : (
             <Login history={this.props.history} setUser={this.props.setUser} />
           )}
         </div>
-        <div></div>
       </div>
     );
   }
