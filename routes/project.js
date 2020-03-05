@@ -94,8 +94,10 @@ router.post("/project/:id/createtask", loginCheck, (req, res) => {
       .then(task => {
         Project.findByIdAndUpdate(projectId, {
           $push: { tasks: task._id }
+        }).then(ele => {
+          console.log("TAAASSSKKOKIAEJOIJEIOAJFOIAEJF", task);
+          res.json(task);
         });
-        res.json(task);
       })
       .catch(err => {
         console.error(err);
@@ -115,7 +117,7 @@ router.post("/project/:id/changestatus/:taskid", loginCheck, (req, res) => {
   const { status } = req.body;
   Task.findById(ticketId).then(ticket => {
     ticket.updateOne({ status: status }).then(task => {
-      //res.json(task);
+      res.json({ ticket, status });
     });
   });
 });

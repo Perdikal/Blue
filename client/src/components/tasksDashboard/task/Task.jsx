@@ -6,12 +6,11 @@ import { Draggable } from "react-beautiful-dnd";
 
 export default class Task extends Component {
   state = {
-    tasks: [],
     showForm: false
   };
-  componentDidMount() {
+  /* componentDidMount() {
     this.getTaskData();
-  }
+  } */
 
   // componentWillUpdate(prevProps, prevState) {
   //   if (prevState.tasks !== this.state.tasks) {
@@ -20,30 +19,14 @@ export default class Task extends Component {
   //   }
   // }
 
-  updateAddedTasks = task => {
-    this.state.tasks.push(task);
-    this.setState({
-      tasks: [...this.state.tasks, task],
-      showForm: false
-    });
-  };
+  // updateAddedTasks = task => {
+  //   this.state.tasks.push(task);
+  //   this.setState({
+  //     tasks: [...this.state.tasks, task],
+  //     showForm: false
+  //   });
+  // };
 
-  getTaskData = () => {
-    axios
-      .get(`/api/project/${this.props.params.id}/tasks`)
-      .then(response => {
-        this.setState({
-          tasks: response.data //push?
-        });
-      })
-      .catch(err => {
-        console.error(err);
-      });
-  };
-
-  /* Task() {
-    return <h1> </h1>;
-  } */
   showForm = () => {
     this.setState({
       showForm: !this.state.showForm
@@ -68,8 +51,31 @@ export default class Task extends Component {
           {provided => (
             <div {...provided.droppableProps} ref={provided.innerRef}>
               <h2>To dos:</h2>
-              {this.state.tasks.map((task, index) => {
-                if (task.status === "to-do") {
+              {this.props.to_dos.map((task, index) => {
+                return (
+                  <Draggable index={index} draggableId={String(task._id)}>
+                    {provided => (
+                      <div
+                        ref={provided.innerRef}
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}
+                      >
+                        <div id="{task._id}">{task.title}</div>
+                      </div>
+                    )}
+                  </Draggable>
+                );
+              })}
+              {provided.placeholder}
+            </div>
+          )}
+        </Droppable>
+        <div>
+          <Droppable droppableId="doingId">
+            {provided => (
+              <div {...provided.droppableProps} ref={provided.innerRef}>
+                <h2>Doing:</h2>
+                {this.props.doings.map((task, index) => {
                   return (
                     <Draggable index={index} draggableId={String(task._id)}>
                       {provided => (
@@ -83,33 +89,6 @@ export default class Task extends Component {
                       )}
                     </Draggable>
                   );
-                }
-              })}
-              {provided.placeholder}
-            </div>
-          )}
-        </Droppable>
-        <div>
-          <Droppable droppableId="doingId">
-            {provided => (
-              <div {...provided.droppableProps} ref={provided.innerRef}>
-                <h2>Doing:</h2>
-                {this.state.tasks.map((task, index) => {
-                  if (task.status === "doing") {
-                    return (
-                      <Draggable index={index} draggableId={String(task._id)}>
-                        {provided => (
-                          <div
-                            ref={provided.innerRef}
-                            {...provided.draggableProps}
-                            {...provided.dragHandleProps}
-                          >
-                            <div id="{task._id}">{task.title}</div>
-                          </div>
-                        )}
-                      </Draggable>
-                    );
-                  }
                 })}
                 {provided.placeholder}
               </div>
@@ -121,22 +100,20 @@ export default class Task extends Component {
             {provided => (
               <div {...provided.droppableProps} ref={provided.innerRef}>
                 <h2>Done:</h2>
-                {this.state.tasks.map((task, index) => {
-                  if (task.status === "done") {
-                    return (
-                      <Draggable index={index} draggableId={String(task._id)}>
-                        {provided => (
-                          <div
-                            ref={provided.innerRef}
-                            {...provided.draggableProps}
-                            {...provided.dragHandleProps}
-                          >
-                            <div id="{task._id}">{task.title}</div>
-                          </div>
-                        )}
-                      </Draggable>
-                    );
-                  }
+                {this.props.dones.map((task, index) => {
+                  return (
+                    <Draggable index={index} draggableId={String(task._id)}>
+                      {provided => (
+                        <div
+                          ref={provided.innerRef}
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
+                        >
+                          <div id="{task._id}">{task.title}</div>
+                        </div>
+                      )}
+                    </Draggable>
+                  );
                 })}
                 {provided.placeholder}
               </div>
@@ -150,7 +127,7 @@ export default class Task extends Component {
         {this.state.showForm ? (
           <NewTask
             params={this.props.params}
-            updateAddedTasks={this.updateAddedTasks}
+            updateAddedTasks={this.props.updateAddedTasks}
           />
         ) : (
           ""

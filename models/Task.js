@@ -11,8 +11,8 @@ const taskSchema = new Schema(
     },
     status: {
       type: String,
-      enum: ["to-do", "doing", "done", "toUpdate"],
-      default: "to-do"
+      enum: ["to_do", "doing", "done", "toUpdate"],
+      default: "to_do"
     },
     project: { type: Schema.Types.ObjectId, ref: "Project" },
     assignee: {
