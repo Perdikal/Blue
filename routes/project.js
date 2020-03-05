@@ -44,7 +44,7 @@ router.post("/project/createProject", loginCheck, (req, res) => {
 
     Project.create({
       name: name,
-      members: [...idArray], //[...idArray, req.user._id], I removed req.user._id so it adds the project only once to the user's project array
+      members: [...idArray, req.user._id], //[...idArray, req.user._id], I removed req.user._id so it adds the project only once to the user's project array
       author: req.user._id
     }).then(project => {
       project.members.forEach(member => {
