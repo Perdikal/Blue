@@ -23,6 +23,7 @@ export default class HomePage extends Component {
         </div>
 
         <Info />
+
         <Steps />
       </div>
     );

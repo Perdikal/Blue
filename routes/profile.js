@@ -1,9 +1,9 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const User = require('../models/User');
-const Project = require('../models/Project');
+const User = require("../models/User");
+const Project = require("../models/Project");
 
-router.get('/profile', (req, res) => {
+router.get("/profile", (req, res) => {
   const userId = req.params.id;
 
   Profile.findById(userId)
@@ -17,7 +17,7 @@ router.get('/profile', (req, res) => {
     });
 });
 
-router.post('/profile/edit', (req, res) => {
+router.post("/profile/edit", (req, res) => {
   const userId = req.user._id;
   const { firstName, lastName, email, role } = req.body;
   User.findByIdAndUpdate(
@@ -33,7 +33,5 @@ router.post('/profile/edit', (req, res) => {
     res.json(user);
   });
 });
-
-
 
 module.exports = router;

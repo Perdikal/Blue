@@ -6,7 +6,6 @@ import Footer from "./components/footer/Footer";
 import HomePage from "./components/homePage/HomePage";
 import ProfilePage from "./components/profilePage/ProfilePage";
 import TaskDashboard from "./components/tasksDashboard/TaskDashboard";
-import Project from "./components/profilePage/project/Project";
 
 class App extends React.Component {
   state = {
@@ -40,24 +39,17 @@ class App extends React.Component {
             />
           )}
         />
-        {/* <Route
-          exact
-          path="/"
-          render={props => (
-            <Signup
-              history={props.history}
-              //{...props}
-              setUser={this.setUser}
-              user={this.state.user}
-            />
-          )}
-        /> */}
 
         {this.state.user ? (
-          <Route exact path="/" component={ProfilePage} />
+          <Route
+            exact
+            path="/"
+            render={props => <ProfilePage {...props} user={this.state.user} />}
+          />
         ) : (
           <Route exact path="/" component={HomePage} />
         )}
+
         <Route
           exact
           path="/profilepage"
@@ -67,11 +59,6 @@ class App extends React.Component {
           exact
           path="/project/:id"
           render={props => <TaskDashboard {...props} user={this.state.user} />}
-        />
-        <Route
-          exact
-          path="/projects"
-          render={props => <Project {...props} user={this.state.user} />}
         />
 
         <Footer />

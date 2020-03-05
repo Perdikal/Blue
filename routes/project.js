@@ -96,8 +96,10 @@ router.post("/project/:id/createtask", loginCheck, (req, res) => {
       .then(task => {
         Project.findByIdAndUpdate(projectId, {
           $push: { tasks: task._id }
+        }).then(ele => {
+          console.log("TAAASSSKKOKIAEJOIJEIOAJFOIAEJF", task);
+          res.json(task);
         });
-        res.json(task);
       })
       .catch(err => {
         console.error(err);
@@ -117,7 +119,7 @@ router.post("/project/:id/changestatus/:taskid", loginCheck, (req, res) => {
   const { status } = req.body;
   Task.findById(ticketId).then(ticket => {
     ticket.updateOne({ status: status }).then(task => {
-      //res.json(task);
+      res.json({ ticket, status });
     });
   });
 });
@@ -149,6 +151,23 @@ router.post("/project/:id/log", loginCheck, (req, res) => {
     })
     .catch(err => {
       console.error(err);
+    });
+});
+router.post("/project/:id/delete", loginCheck, (req, res, next) => {
+  const projectId = req.params.id;
+  Project.findByIdAndRemove(projectId)
+    .then(project => {
+      console.log("Project DELETEEEED");
+      User.findByIdAndUpdate(
+        req.user._id,
+        { $pull: { projects: project._id } },
+        { new: true }
+      ).then(() => {
+        res.json();
+      });
+    })
+    .catch(err => {
+      next(err);
     });
 });
 
