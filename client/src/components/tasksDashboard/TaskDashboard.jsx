@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Task from './task/Task';
 import Log from './logComp/Log';
+import { DragDropContext } from 'react-beautiful-dnd';
 import axios from 'axios';
 
 export default class TaskDashboard extends Component {
@@ -9,8 +10,37 @@ export default class TaskDashboard extends Component {
     showForm: false
   };
 
+  onDragEnd = result => {
+    const { destination, source, draggableId } = result;
+    if (!destination) {
+      console.log(draggableId);
+      return;
+    }
+    if (destination.droppableId === 'toDoId') {
+      axios.post(
+        `/api/project/${this.props.match.params.id}/changestatus/${draggableId}`,
+        { status: 'to-do' }
+      );
+    }
+    if (destination.droppableId === 'doneId') {
+      axios.post(
+        `/api/project/${this.props.match.params.id}/changestatus/${draggableId}`,
+        { status: 'done' }
+      );
+    }
+    if (destination.droppableId === 'doingId') {
+      axios.post(
+        `/api/project/${this.props.match.params.id}/changestatus/${draggableId}`,
+        { status: 'doing' }
+      );
+    }
+  };
+
+  changeStatus = () => {};
+
   updateAddedTasks = task => {
     console.log('Does this even work');
+
     this.state.tasks.push(task);
     this.setState({
       tasks: this.state.tasks,
@@ -37,16 +67,20 @@ export default class TaskDashboard extends Component {
     console.log(this.props.match.params.id);
 
     return (
-      <div>
-        <Log params={this.props.match.params} />
-        <Task
-          params={this.props.match.params}
-          updateAddedTasks={this.updateAddedTasks}
-        />
+      <DragDropContext onDragEnd={this.onDragEnd}>
         <div>
-          <button onClick={this.deleteProject}>Delete this project</button>
+          <Task
+            params={this.props.match.params}
+            updateAddedTasks={this.updateAddedTasks}
+          />
+          <Log />
         </div>
-      </div>
+      </DragDropContext>
     );
   }
 }
+
+{/* <div>
+{' '}
+<button onClick={this.deleteProject}>Delete this project</button>
+</div> */}

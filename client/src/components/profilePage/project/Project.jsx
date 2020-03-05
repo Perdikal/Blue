@@ -15,6 +15,8 @@ export default class Project extends Component {
 
   updateAddedProjects = project => {
     console.log('Does this even work');
+
+    console.log('Does this even work');
     this.state.projects.push(project);
     this.setState({
       projects: this.state.projects,
@@ -58,8 +60,6 @@ export default class Project extends Component {
       });
   };
 
-  
-
   render() {
     return (
       <div>
@@ -70,7 +70,6 @@ export default class Project extends Component {
                 <div className="projectBox">
                   <div>
                     <h4>{project.name}</h4>
-
                   </div>
                 </div>
               </Link>
