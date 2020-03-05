@@ -51,7 +51,7 @@ export default class Task extends Component {
           {provided => (
             <div {...provided.droppableProps} ref={provided.innerRef}>
               <h2>To dos:</h2>
-              {this.props.to_dos.map((task, index) => {
+              {this.props.to_dos?.map((task, index) => {
                 return (
                   <Draggable index={index} draggableId={String(task._id)}>
                     {provided => (
@@ -75,7 +75,7 @@ export default class Task extends Component {
             {provided => (
               <div {...provided.droppableProps} ref={provided.innerRef}>
                 <h2>Doing:</h2>
-                {this.props.doings.map((task, index) => {
+                {this.props.doings?.map((task, index) => {
                   return (
                     <Draggable index={index} draggableId={String(task._id)}>
                       {provided => (
@@ -100,7 +100,7 @@ export default class Task extends Component {
             {provided => (
               <div {...provided.droppableProps} ref={provided.innerRef}>
                 <h2>Done:</h2>
-                {this.props.dones.map((task, index) => {
+                {this.props.dones?.map((task, index) => {
                   return (
                     <Draggable index={index} draggableId={String(task._id)}>
                       {provided => (
@@ -127,7 +127,7 @@ export default class Task extends Component {
         {this.state.showForm ? (
           <NewTask
             params={this.props.params}
-            updateAddedTasks={this.props.updateAddedTasks}
+            updateAddedTasks={this.updateAddedTasks}
           />
         ) : (
           ""
