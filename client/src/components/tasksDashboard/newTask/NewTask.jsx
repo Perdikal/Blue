@@ -35,7 +35,6 @@ export default class NewTask extends Component {
         author: this.state.author
       })
       .then(response => {
-        console.log("RESPONSE ON DATA", response.data);
         this.props.updateAddedTasks(response.data);
       });
   };
