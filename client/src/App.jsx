@@ -10,7 +10,6 @@ import TaskDashboard from './components/tasksDashboard/TaskDashboard';
 class App extends React.Component {
   state = {
     user: this.props.user
-    // projects: this.props.project
   };
 
   setUser = userObj => {
@@ -21,7 +20,7 @@ class App extends React.Component {
 
   deleteUserState() {
     this.setState({
-      user: ''
+      user: ""
     });
   }
   render() {
@@ -32,7 +31,6 @@ class App extends React.Component {
             <Navbar
               color={'#192c7e'}
               history={props.history}
-              //{...props}
               setUser={this.setUser}
               user={this.state.user}
               deleteUserState={this.deleteUserState}

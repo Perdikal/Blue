@@ -63,7 +63,7 @@ export default class Log extends Component {
     return (
       <div>
         <h4>Activity History:</h4>
-        <div>
+        <div className="log">
           {this.state.allLogs.map(element => {
             console.log(element);
             return (

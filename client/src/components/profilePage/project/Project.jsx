@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
-import NewProjectForm from '../NewProjectForm/NewProjectForm';
+import React, { Component } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
+import NewProjectForm from "../NewProjectForm/NewProjectForm";
 
 export default class Project extends Component {
   state = {
@@ -23,7 +23,7 @@ export default class Project extends Component {
 
   getProjectData = () => {
     axios
-      .get('/api/projects')
+      .get("/api/projects")
       .then(response => {
         console.log(response.data);
         this.setState({
@@ -48,7 +48,7 @@ export default class Project extends Component {
 
   createProject = () => {
     axios
-      .post('/api/project/createProject')
+      .post("/api/project/createProject")
       .then(response => {
         console.log(response);
       })
@@ -68,7 +68,7 @@ export default class Project extends Component {
         {this.state.showForm ? (
           <NewProjectForm updateAddedProjects={this.updateAddedProjects} />
         ) : (
-          ''
+          ""
         )}
         <div className="containerProjects">
           {this.state.showAll ? (
