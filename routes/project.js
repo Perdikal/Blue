@@ -44,14 +44,14 @@ router.post('/project/createProject', loginCheck, (req, res) => {
 
     Project.create({
       name: name,
-      members: [...idArray], //[...idArray, req.user._id], I removed req.user._id so it adds the project only once to the user's project array
+      members: [...idArray, req.user._id], //[...idArray, req.user._id], I removed req.user._id so it adds the project only once to the user's project array
       author: req.user._id
     }).then(project => {
       project.members.forEach(member => {
         User.findByIdAndUpdate(member, {
           $push: { projects: project._id }
         }).then(updated => {
-          console.log('user has been updated!', updated);
+          console.log("user has been updated!", updated);
         });
       });
 
@@ -174,12 +174,12 @@ projects.push(Project)
     });
 });
 
-router.post('/project/:id/delete', loginCheck, (req, res, next) => {
+router.post("/project/:id/delete", loginCheck, (req, res, next) => {
   const projectId = req.params.id;
 
   Project.findByIdAndRemove(projectId)
     .then(project => {
-      console.log('Project DELETEEEED');
+      console.log("Project DELETEEEED");
       User.findByIdAndUpdate(
         req.user._id,
         { $pull: { projects: project._id } },
