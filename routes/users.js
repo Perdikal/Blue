@@ -85,18 +85,10 @@ router.get("/linkedin", passport.authenticate("linkedin"));
 
 router.get(
   "/linkedin/callback",
-<<<<<<< HEAD
-  passport.authenticate("linkedin", { failureRedirect: "/login" }),
-  function(req, res) {
-    // Successful authentication, redirect home.
-    res.render("/profilepage");
-  }
-=======
   passport.authenticate("linkedin", {
     failureRedirect: "/login",
     successRedirect: "http://localhost:3000/"
   })
->>>>>>> 09d2eb5cc90871848f3f50207b206dbe9e990810
 );
 
 module.exports = router;

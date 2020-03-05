@@ -14,10 +14,6 @@ export default class Project extends Component {
   }
 
   updateAddedProjects = project => {
-<<<<<<< HEAD
-=======
-    console.log("Does this even work");
->>>>>>> 09d2eb5cc90871848f3f50207b206dbe9e990810
     this.state.projects.push(project);
     this.setState({
       projects: this.state.projects,
