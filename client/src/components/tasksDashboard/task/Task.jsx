@@ -48,7 +48,7 @@ export default class Task extends Component {
 
   render() {
     return (
-      <div>
+      <div className="tasks-container">
         <Droppable droppableId="toDoId">
           {provided => (
             <div {...provided.droppableProps} ref={provided.innerRef}>
