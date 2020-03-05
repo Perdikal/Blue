@@ -12,12 +12,12 @@ export default class UserInfo extends Component {
   };
 
   render() {
-    console.log("USERINFO", this.props.user);
-    console.log("USERINFO2", this.props.user.lastName);
-    console.log(this.props.user.role);
+    console.log("Aquiiiiii", this.props.user);
     return (
       <div className="information-container">
-        <img src={this.props.user?.image_Url} alt="User Image" />
+        <div className="profile-image">
+          <img src={this.props.user?.image_Url} alt="User Image" />
+        </div>
         <div className="text-info">
           <div className="name-display">
             <p>

@@ -58,41 +58,45 @@ export default class Project extends Component {
   };
 
   render() {
-    console.log("Projectsssssssss", this.props.user.projects);
-    console.log("tetetet", this.project);
     return (
       <div>
-        {this.state.showAll ? (
-          this.state.projects.map(project => {
-            return (
-              <Link to={`project/${project._id}`}>
-                <div className="projectBox">
-                  <span>{project.name}</span>
-                </div>
-              </Link>
-            );
-          })
-        ) : (
-          <>
-            {this.state.projects.slice(0, 3).map(project => {
-              return (
-                <Link to={`project/${project._id}`}>
-                  <div className="projectBox">
-                    <span>{project.name}</span>
-                  </div>
-                </Link>
-              );
-            })}
-          </>
-        )}
         <button onClick={this.getAll}>All projects</button>
 
         <button onClick={this.showForm}>Create New Project</button>
+        <h3>Your Projects:</h3>
+
         {this.state.showForm ? (
           <NewProjectForm updateAddedProjects={this.updateAddedProjects} />
         ) : (
           ""
         )}
+        <div className="containerProjects">
+          {this.state.showAll ? (
+            this.state.projects.map(project => {
+              return (
+                <Link to={`project/${project._id}`}>
+                  <div className="projectBox">
+                    <div>
+                      <h4>{project.name}</h4>
+                    </div>
+                  </div>
+                </Link>
+              );
+            })
+          ) : (
+            <>
+              {this.state.projects.slice(0, 3).map(project => {
+                return (
+                  <Link to={`project/${project._id}`}>
+                    <div className="projectBox">
+                      <span>{project.name}</span>
+                    </div>
+                  </Link>
+                );
+              })}
+            </>
+          )}
+        </div>
       </div>
     );
   }

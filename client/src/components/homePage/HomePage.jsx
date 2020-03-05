@@ -17,8 +17,13 @@ export default class HomePage extends Component {
   render() {
     return (
       <div>
+        <div className="blue2">
+          <h1>Blue</h1>
+          <Signup></Signup>
+        </div>
+
         <Info />
-        <Signup />
+
         <Steps />
       </div>
     );
